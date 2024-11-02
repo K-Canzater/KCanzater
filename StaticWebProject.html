@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless API Project - Your Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Base styles - keeping consistency with main site but we can change colors */
+        :root {
+            --primary-color: #232f3e;
+            --secondary-color: #ff9900;
+            --accent-color: #00a1c9;
+            --text-color: #2d3436;
+            --bg-color: #ffffff;
+            --section-bg: #f8f9fa;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --code-bg: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Navigation styling remains the same */
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Project content specific styles */
+        .project-container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-details {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-meta {
+            background: var(--section-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            height: fit-content;
+        }
+
+        .aws-services {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .aws-service-tag {
+            background-color: var(--section-bg);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
+        .project-links a:hover {
+            opacity: 0.9;
+        }
+
+        /* Architecture diagram section */
+        .architecture {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .architecture img {
+            width: 100%;
+            height: auto;
+            margin: 1rem 0;
+        }
+
+
+        .architecture-list {
+            list-style-type: disc; /* Choose the type of bullet */
+            margin-left: 2rem; /* Adjust this value for desired indentation */
+            padding-left: 0; /* Remove default padding */
+        }
+
+    .architecture-list li {
+            margin-bottom: 0.5rem; /* Optional: adds some space between bullet points */
+        }
+
+
+
+
+
+
+        /* Implementation steps */
+        .implementation-steps {
+            margin: 3rem 0;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .step h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-number {
+            background: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        /* Screenshots */
+        .screenshot {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+        }
+
+        .screenshot-caption {
+            background: var(--section-bg);
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Results section */
+        .results {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 3rem 0;
+        }
+
+        .results ul {
+            list-style-type: none;
+            margin: 1rem 0;
+        }
+
+        .logo {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .results li::before {
+            content: "✓";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Navigation sidebar */
+        .project-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+
+        .aws-service-tag {
+            background-color: white; /* Background color for the tag */
+            color: var(--primary-color); /* Text color */
+            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
+            border: 2px solid #d3d3d3; /* Greyish border color */
+            border-radius: 20px; /* Round corners */
+            font-size: 0.9rem; /* Font size */
+            font-weight: 500; /* Font weight */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        }
+
+
+
+
+        @media (min-width: 1400px) {
+            .project-nav {
+                display: block;
+            }
+        }
+
+        .project-nav ul {
+            list-style: none;
+        }
+
+        .project-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .project-nav a:hover {
+            background-color: var(--section-bg);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="Homepage.html" class="logo">
+                <i class="fab fa-aws"></i>
+                Khayla Canzater
+            </a>
+            <div class="nav-links">
+                <a href="Homepage.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="Homepage.html#about">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="project-container">
+        <article class="project-content">
+            <div class="project-header">
+                <h1>Host a Website on Amazon S3</h1>
+                <p>A scalable website hosted on Amazon S3 for efficient data storage and easy web access.</p>
+            </div>
+
+            <div class="project-overview">
+                <div class="project-details">
+                    <h2>Project Overview</h2>
+                    <p>In this project, I set up a static website hosted on Amazon S3, leveraging S3’s scalable storage and high availability to make the site accessible from anywhere on the web. I configured an S3 bucket to store website files and enabled public access, creating a reliable, cost-effective hosting solution without needing a traditional web server. This setup is ideal for projects requiring fast, scalable access to static content.</p>
+                    
+                    <div class="aws-services">
+                        <span class="aws-service-tag">Amazon S3</span>
+                        
+                    </div>
+                </div>
+
+                <div class="project-meta">
+                    <h3>Project Details</h3>
+                    <ul>
+                        
+                        <li><strong>Status:</strong> Completed</li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+           
+
+            <section class="architecture">
+                <h2>Architecture Overview</h2>
+                <img src="images/StaticWebsite.png" alt="Architecture Diagram">
+                <p>This project leverages Amazon S3 for static website hosting, enabling reliable and scalable web content delivery. The setup includes:</p>
+                <ul class="architecture-list">
+                    <li><strong>S3 Bucket:</strong> Hosts website files with public access for easy viewing.</li>
+                    <li><strong>Static Website Hosting:</strong> Provides a public endpoint via a unique URL.</li>
+                    <li><strong>Access Controls:</strong> Policies and ACLs manage public access to ensure secure content delivery.</li>
+                </ul>
+                <p>This architecture allows fast, secure, and cost-effective hosting without additional server infrastructure.</p>
+            </section>
+            
+            <style>
+                .indented-bullets {
+                    list-style-type: disc; /* Use disc for bullet points */
+                    margin-left: 90px; /* Indent the bullet points */
+                    padding-left: 0; /* Remove default padding */
+                }
+            </style>
+
+            <section class="implementation-steps">
+                <h2>Implementation Steps</h2>
+
+                 <!--Step 1-->
+                <div class="step">
+                    <h3><span class="step-number">1</span> Set Up an AWS Account:</h3>
+                    <ul class="indented-bullets">
+                        <li>Sign up for an AWS account if you don’t have one already.</li>
+                        <li>Log in to the AWS Management Console.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                            </pre>
+                                    </div>
+                                    <div class="screenshot">
+                                        <img src="/Images/Staticimage1.png" alt="AWS Console Setup" >
+                                        <div class="screenshot-caption">AWS Console configuration screen</div>
+                                    </div>
+                                </div>
+                            
+                <!--Step 2-->
+                <div class="step">
+                    <h3><span class="step-number">2</span> Create an S3 Bucket:</h3>
+                    <ul class="indented-bullets">
+                        <li>Search for "S3" in the AWS Management Console.</li>
+                        <li>Select <strong>Create bucket</strong>.</li>
+                        <li>Choose a globally unique bucket name (e.g., nextwork-website-yourname).</li>
+                        <li>Select the AWS Region closest to your location.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                        </pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="/Images/Staticimage2.png" alt="Create S3 Bucket" style="max-width: 100%; height: auto; width: 400px;">
+                        <div class="screenshot-caption">Creating an S3 bucket</div>
+                    </div>
+                </div>                
+
+                <!--Step 3-->
+                <div class="step">
+                    <h3><span class="step-number">3</span> Configure Bucket Settings:</h3>
+                    <ul class="indented-bullets">
+                        <li>Object Ownership: Choose <strong>ACLs enabled</strong> to control access to your files.</li>
+                        <li>Public Access Settings: Clear the check box for <strong>Block all public access</strong> to allow public access to your website.</li>
+                        <li>Acknowledge the warning regarding public access.</li>
+                        <li>Enable Bucket Versioning to keep multiple versions of your files.</li>
+                        <li>Click <strong>Create bucket</strong> to finalize.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                        </pre>
+                    </div>
+                    <div class="screenshot">
+                        
+                        <div class="screenshot-caption" ></div>
+                    
+                </div>
+
+                <!--Step 4 -->
+                <div class="step">
+                    <h3><span class="step-number">4</span> Upload Website Files:</h3>
+                    <ul class="indented-bullets">
+                        <li>Prepare your website files (HTML, CSS, JavaScript, images, etc.).</li>
+                        <li>Upload these files to your newly created S3 bucket.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                        </pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="/Images/Staticimage3.png" alt="Create S3 Bucket">
+                        <div class="screenshot-caption">Uploading website files to S3</div>
+                    </div>
+                </div>
+
+                <!--Step 5-->
+                <div class="step">
+                    <h3><span class="step-number">5</span> Configure Static Website Hosting:</h3>
+                    <ul class="indented-bullets">
+                        <li>Go to the properties of your S3 bucket.</li>
+                        <li>Enable <strong>Static website hosting</strong>.</li>
+                        <li>Specify the index document (e.g., index.html) and error document (e.g., error.html).</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                        </pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="/Images/Staticimage5.png" alt="Create S3 Bucket" style="max-width: 100%; height: auto; width: 400px;" >
+                        <div class="screenshot-caption">Configuring static website hosting</div>
+                    </div>
+                </div>
+
+                <!--Step 6-->
+                <div class="step">
+                    <h3><span class="step-number">6</span> Access Your Website:</h3>
+                    <ul class="indented-bullets">
+                        <li>Once configured, your website will be accessible via the provided S3 endpoint URL.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre>
+                        </pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="/Images/StaticWebsiteFinal.png" alt="Create S3 Bucket">
+                        <div class="screenshot-caption">Accessing your hosted website</div>
+                    </div>
+                </div>
+
+               
+
+                
+
+            <!--Results Pane-->
+            <section class="results">
+                <h2>Project Results</h2>
+                <ul>
+                    <li>Successfully deployed a serverless API on AWS that handles over 1 million requests per month with 99.99% availability, achieving a 60% reduction in operational costs and implementing a comprehensive monitoring and alerting system.
+
+                    </li>
+                    
+                </ul>
+            </section>
+        </article>
+
+       
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
