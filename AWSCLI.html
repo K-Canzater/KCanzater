@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless API Project - Your Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Base styles - keeping consistency with main site but we can change colors */
+        :root {
+            --primary-color: #232f3e;
+            --secondary-color: #ff9900;
+            --accent-color: #00a1c9;
+            --text-color: #2d3436;
+            --bg-color: #ffffff;
+            --section-bg: #f8f9fa;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --code-bg: #f8f9fa;
+        }
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        padding: 20px;
+        }
+
+        .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 90%;
+        max-height: 90vh;
+        }
+
+        .close {
+        position: absolute;
+        right: 25px;
+        top: 10px;
+        color: #fff;
+        font-size: 35px;
+        cursor: pointer;
+        }
+
+        .screenshot img {
+        cursor: pointer;
+        transition: transform 0.3s;
+        }
+
+        .screenshot img:hover {
+        transform: scale(1.02);
+        }
+
+        
+
+        
+        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .project-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1rem auto;
+    }
+
+    .step img {
+        width: 100%;
+        max-width: 600px; /* Adjust this value as needed */
+        margin: 1rem auto;
+    }
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Navigation styling remains the same */
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Project content specific styles */
+        .project-container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-details {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-meta {
+            background: var(--section-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            height: fit-content;
+        }
+
+        .aws-services {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .aws-service-tag {
+            background-color: var(--section-bg);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
+        .project-links a:hover {
+            opacity: 0.9;
+        }
+
+        /* Architecture diagram section */
+        .architecture {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .architecture img {
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem 0;
+        }
+
+
+        .architecture-list {
+            list-style-type: disc; /* Choose the type of bullet */
+            margin-left: 2rem; /* Adjust this value for desired indentation */
+            padding-left: 0; /* Remove default padding */
+        }
+
+    .architecture-list li {
+            margin-bottom: 0.5rem; /* Optional: adds some space between bullet points */
+        }
+
+
+
+
+
+
+        /* Implementation steps */
+        .implementation-steps {
+            margin: 3rem 0;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .step h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-number {
+            background:  #f90;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 2px 8px;
+            margin-right: 10px;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #e5e5e5;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        /* Screenshots */
+        .screenshot {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+        }
+
+        .screenshot img {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            height: auto;
+            display: block;
+
+        
+        }
+
+        .screenshot-caption {
+            background: var(--section-bg);
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Results section */
+        .results {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 3rem 0;
+        }
+
+        .results ul {
+            list-style-type: none;
+            margin: 1rem 0;
+        }
+
+        .bash-content {
+            font-family: monospace;
+            color: #333;
+        }
+
+
+
+        .logo {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .results li::before {
+            content: "✓";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Navigation sidebar */
+        .project-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+
+        .aws-service-tag {
+            background-color: white; /* Background color for the tag */
+            color: var(--primary-color); /* Text color */
+            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
+            border: 2px solid #d3d3d3; /* Greyish border color */
+            border-radius: 20px; /* Round corners */
+            font-size: 0.9rem; /* Font size */
+            font-weight: 500; /* Font weight */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        }
+
+
+
+
+        @media (max-width: 768px) {
+            .screenshot img {
+                max-width: 100%;
+            }
+        }
+
+        .project-nav ul {
+            list-style: none;
+        }
+
+        .project-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .project-nav a:hover {
+            background-color: var(--section-bg);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fab fa-aws"></i>
+                Khayla Canzater
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="index.html#about">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="project-container">
+        <article class="project-content">
+            <div class="project-header">
+                <h1>Building and Securing a Scalable VPC with AWS CLI</h1>
+                <p>Automated the creation and configuration of a secure, scalable Virtual Private Cloud (VPC) in AWS using CLI commands, ensuring seamless internet connectivity and resource isolation for cloud applications.</p>
+            </div>
+
+            <div class="project-overview">
+                <div class="project-details">
+                    <h2>Project Overview</h2>
+                    <p>In this project, I automated the creation of a VPC using AWS CLI, set up a public subnet for internet access, attached an Internet Gateway, and updated route tables to enable internet communication. This project demonstrates automation principles for efficient cloud networking.</p>
+                    
+                    <div class="aws-services">
+                        <span class="aws-service-tag">AWS CLI</span>
+                        <span class="aws-service-tag">Amazon VPC (Virtual Private Cloud)</span>
+                        <span class="aws-service-tag">Internet Gateway</span>
+                        <span class="aws-service-tag">Subnets</span>
+                        <span class="aws-service-tag">Route Tables</span>
+                        <span class="aws-service-tag">Security Groups</span>
+                        
+                    </div>
+                </div>
+
+                <div class="project-meta">
+                    <h3>Project Details</h3>
+                    <ul>
+                        
+                        <li><strong>Status:</strong> Completed</li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+           
+
+            <section class="architecture">
+                <h2>Architecture Overview</h2>
+                <img src="images/architectureVPC.png" alt="Architecture Diagram">
+                <p>This project leverages Amazon VPC and AWS CLI to create a secure and scalable cloud environment with internet access. The automated setup includes:</p>
+                <ul class="architecture-list">
+                    <li><strong>VPC:</strong> Acts as a private network to house your resources in a secure environment.</li>
+                    <li><strong>Subnets:</strong> A public subnet for resources that need internet access (like EC2 instances).</li>
+                    <li><strong>Internet Gateway:</strong> Enables communication between the resources in the VPC and the internet.</li>
+                    <li><strong>Route Table:</strong> Directs traffic within the VPC and allows internet access through the Internet Gateway.</li>
+                    <li><strong>Security Groups:</strong> Provides security and access controls for resources within the VPC.</li>
+                </ul>
+                <p>This architecture, automated through AWS CLI, allows for rapid deployment and efficient management of cloud networks while ensuring security and scalability.</p>
+            </section>
+            
+            <style>
+                .indented-bullets {
+                    list-style-type: disc; /* Use disc for bullet points */
+                    margin-left: 90px; /* Indent the bullet points */
+                    padding-left: 0; /* Remove default padding */
+                    margin-top: 1rem;       /* Add space above bullet lists */
+                    margin-bottom: 1rem;    /* Add space below bullet lists */
+                    margin-left: 2rem; 
+                }
+            </style>
+
+            <section class="implementation-steps">
+                <h2>Implementation Steps</h2>
+
+                 <!--Step 1-->
+<div class="step">
+    <h3><span class="step-number">1</span> Create a Virtual Private Cloud (VPC)</h3>
+    <p><strong>Objective:</strong> Set up a VPC to securely manage cloud resources.</p>
+    
+    <p><strong>Command:</strong></p>
+    <div class="code-block">
+        <div class="bash-content">aws ec2 create-vpc --cidr-block 10.0.0.0/16</div>
+    </div>
+    
+    <p><strong>Result:</strong> Successfully created VPC with ID <strong>vpc-0a407c238e2a3c8aa</strong>.</p>
+    <div class="screenshot">
+        <img src="/Images/AWS CLI Step 1.png" alt="VPC setup command output.">
+        <div class="screenshot-caption">VPC setup command output.</div>
+    </div>
+</div>
+                            
+                <!--Step 2-->
+                <div class="step">
+                    <h3><span class="step-number">2</span> Set Up a Subnet</h3>
+                    <ul class="indented-bullets">
+                        <p><strong>Objective:</strong> Create a subnet within the VPC to organize resources and enable internet access.</p>
+                    
+                        <p><strong>Command:</strong></p>
+         <div class="code-block">
+            <div class="bash-content">aws ec2 create-subnet --vpc-id vpc-0a407c238e2a3c8aa --cidr-block 10.0.1.0/24</div>
+        </div>
+
+
+
+                        <p><strong>Result:</strong> Successfully created Subnet with ID <strong>subnet-01ae8fc8816f25db1.</strong></p>
+                   
+                    <div class="screenshot">
+                        <img src="/Images/Step 3 Subnet ID.png" alt="Subnet setup command output." >
+                        <div class="screenshot-caption">Subnet setup command output.</div>
+                    </div>
+                </div>                
+
+                <!--Step 3-->
+                <div class="step">
+                    <h3><span class="step-number">3</span>Attach an Internet Gateway</h3>
+                    <ul class="indented-bullets">
+                        <p><strong>Objective:</strong> Enable internet access for resources in the VPC.</p>
+                    
+                        <p><strong>Command: </strong></p>
+         <div class="code-block">
+            <div class="bash-content">aws ec2 create-internet-gateway</div>
+            <div class="bash-content">aws ec2 attach-internet-gateway --internet-gateway-id igw-046fc5bc242644a8a --vpc-id vpc-0a407c238e2a3c8aa
+            </div>
+        </div>
+
+
+
+                        <p><strong>Result:</strong> Successfully attached Internet Gateway with ID <strong>igw-046fc5bc242644a8a.</strong></p>
+                   
+                    <div class="screenshot">
+                        <img src="/Images/Step 4 internet gateway.png" alt="Internet Gateway attached to VPC." >
+                        <div class="screenshot-caption">Internet Gateway attached to VPC.</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="/Images/Step 5 internetgate way attached.png" alt="Internet Gateway attached to VPC." >
+                        <div class="screenshot-caption">Internet Gateway attached to VPC.</div>
+                    </div>
+                </div>     
+
+                <!--Step 4 -->
+                <div class="step">
+                    <h3><span class="step-number">4</span> Update Route Table for Internet Access</h3>
+                    <ul class="indented-bullets">
+                        <p><strong>Objective:</strong> Route internet traffic through the Internet Gateway for external communication.</p>
+                    
+                        <p><strong>Command: </strong></p>
+                        <div class="code-block">
+                           <div class="bash-content">aws ec2 create-route --route-table-id rtb-xxxxx --destination-cidr-block 0.0.0.0/0 --gateway-id igw-046fc5bc242644a8a
+                        </div>
+                           
+                           </div>
+
+
+                        <p><strong>Result:</strong> Internet access for the VPC is now configured.</p>
+                    
+                    
+                </div>
+
+                
+
+                <!--Step 5-->
+                <div class="step">
+                    <h3><span class="step-number">5</span> VPC Fully Connected to the Internet</h3>
+                    <ul class="indented-bullets">
+                        <li><strong>Result:</strong></li></li>Your VPC is now fully internet-enabled, allowing seamless communication with external resources.</li>
+                    </ul>
+                   
+                    <div class="screenshot">
+                        <img src="/Images/VPCFinal.png" alt="VPC and Internet Conversation ">
+                        <div class="screenshot-caption">A real conversation between the VPC and the Internet.</div>
+                    </div>
+                </div>
+
+               
+
+                
+
+            <!--Results Pane-->
+            <section class="results">
+                <h2>Project Results</h2>
+                <ul>
+                    <li>The automated VPC setup using AWS CLI successfully created a secure and scalable cloud network. With subnets, an Internet Gateway, and route table updates, the environment supports seamless communication for cloud resources while maintaining security and scalability.
+
+                    </li>
+                    
+                </ul>
+            </section>
+        </article>
+
+       
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Modal code starts here -->
+    <style>
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            padding: 20px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 10px;
+            color: #fff;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .screenshot img {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .screenshot img:hover {
+            transform: scale(1.02);
+        }
+    </style>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // Get the modal
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click event to all screenshots
+        document.querySelectorAll('.screenshot img').forEach(img => {
+            img.onclick = function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+            }
+        });
+
+        // Close modal when clicking X
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
