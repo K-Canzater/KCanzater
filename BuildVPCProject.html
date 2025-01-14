@@ -8,35 +8,23 @@
     <style>
         /* Base styles - keeping consistency with main site but we can change colors */
         :root {
-            --primary-color: #232f3e;
-            --secondary-color: #ff9900;
-            --accent-color: #00a1c9;
-            --text-color: #2d3436;
-            --bg-color: #ffffff;
-            --section-bg: #f8f9fa;
-            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --code-bg: #f8f9fa;
+            --primary-color: #2C3E50;     /* Deep Blue */
+            --secondary-color: #1ABC9C;    /* Turquoise */
+            --accent-color: #E74C3C;       /* Coral Red */
+            --text-color: #2C3E50;         /* Deep Blue */
+            --bg-color: #ECF0F1;           /* Light Gray */
+            --section-bg: #F7F7F9;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --code-bg: #F8F9FA;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .project-content img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 1rem auto;
-    }
-
-    .step img {
-        width: 100%;
-        max-width: 600px; /* Adjust this value as needed */
-        margin: 1rem auto;
-    }
         body {
             line-height: 1.6;
             color: var(--text-color);
@@ -45,12 +33,60 @@
 
         /* Navigation styling remains the same */
         header {
-            background-color: var(--primary-color);
+            background-color: rgba(44, 62, 80, 0.98);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s;
+        }
+
+        header:hover {
+            background-color: rgba(44, 62, 80, 1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--accent-color);
+            font-size: 1.75rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
         }
 
         /* Project content specific styles */
@@ -144,10 +180,9 @@
 
         .architecture img {
             width: 100%;
-            max-width: 800px;
+            height: auto;
             margin: 1rem 0;
         }
-
 
         .architecture-list {
             list-style-type: disc; /* Choose the type of bullet */
@@ -155,14 +190,9 @@
             padding-left: 0; /* Remove default padding */
         }
 
-    .architecture-list li {
+        .architecture-list li {
             margin-bottom: 0.5rem; /* Optional: adds some space between bullet points */
         }
-
-
-
-
-
 
         /* Implementation steps */
         .implementation-steps {
@@ -196,6 +226,12 @@
             border-radius: 50%;
         }
 
+        /* Indented bullets for steps */
+        .step ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+        }
+
         /* Code blocks */
         .code-block {
             background: var(--code-bg);
@@ -211,17 +247,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            width: 100%;
         }
 
         .screenshot img {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
             height: auto;
-            display: block;
-
-        
         }
 
         .screenshot-caption {
@@ -243,16 +273,6 @@
         .results ul {
             list-style-type: none;
             margin: 1rem 0;
-        }
-
-        .logo {
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .results li {
@@ -281,23 +301,9 @@
             display: none;
         }
 
-        .aws-service-tag {
-            background-color: white; /* Background color for the tag */
-            color: var(--primary-color); /* Text color */
-            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
-            border: 2px solid #d3d3d3; /* Greyish border color */
-            border-radius: 20px; /* Round corners */
-            font-size: 0.9rem; /* Font size */
-            font-weight: 500; /* Font weight */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-        }
-
-
-
-
-        @media (max-width: 768px) {
-            .screenshot img {
-                max-width: 100%;
+        @media (min-width: 1400px) {
+            .project-nav {
+                display: block;
             }
         }
 
@@ -316,31 +322,6 @@
 
         .project-nav a:hover {
             background-color: var(--section-bg);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
         }
     </style>
 </head>
@@ -377,21 +358,16 @@
                         <span class="aws-service-tag">Subnets</span>
                         <span class="aws-service-tag">Route Tables</span>
                         <span class="aws-service-tag">Security Groups</span>
-                        
                     </div>
                 </div>
 
                 <div class="project-meta">
                     <h3>Project Details</h3>
                     <ul>
-                        
                         <li><strong>Status:</strong> Completed</li>
                     </ul>
-                    
                 </div>
             </div>
-
-           
 
             <section class="architecture">
                 <h2>Architecture Overview</h2>
@@ -407,29 +383,17 @@
                 <p>This architecture enables secure, isolated environments for your applications, while allowing seamless internet communication for publicly accessible resources, such as web servers or APIs.</p>
             </section>
             
-            <style>
-                .indented-bullets {
-                    list-style-type: disc; /* Use disc for bullet points */
-                    margin-left: 90px; /* Indent the bullet points */
-                    padding-left: 0; /* Remove default padding */
-                    margin-top: 1rem;       /* Add space above bullet lists */
-                    margin-bottom: 1rem;    /* Add space below bullet lists */
-                    margin-left: 2rem; 
-                }
-            </style>
-
             <section class="implementation-steps">
                 <h2>Implementation Steps</h2>
 
-                 <!--Step 1-->
                 <div class="step">
                     <h3><span class="step-number">1</span> Create a Virtual Private Cloud (VPC)</h3>
                     <p><strong>Objective:</strong> Set up a VPC, a private network for securely running applications.</p>
-                    <ul class="indented-bullets">
+                    <ul>
                         <li><strong>Access AWS Management Console</strong> and search for <strong>VPC</strong>.</li>
                         <li>Navigate to <strong>Your VPCs</strong> and ensure you're in the correct <strong>Region</strong>.</li>
                         <li>Click <strong>Create VPC</strong>, select <strong>VPC only</strong>, and configure:
-                            <ul class="indented-bullets">
+                            <ul>
                                 <li><strong>Name tag:</strong> NextWork VPC</li>
                                 <li><strong>IPv4 CIDR block:</strong> 10.0.0.0/16</li>
                             </ul>
@@ -438,21 +402,18 @@
                     </ul>
                     <p><strong>Result:</strong> Successfully created the <strong>NextWork VPC</strong>.</p>
                     <div class="code-block">
-                        <pre>
-                            </pre>
-                                    </div>
-                                    <div class="screenshot">
-                                        <img src="Step 1 VPC Set Up Page.png" alt="VPC setup page" >
-                                        <div class="screenshot-caption">The setup page for my VPC.</div>
-                                    </div>
-                                </div>
-                            
-                <!--Step 2-->
+                        <pre></pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="Step 1 VPC Set Up Page.png" alt="VPC setup page">
+                        <div class="screenshot-caption">The setup page for my VPC.</div>
+                    </div>
+                </div>
+
                 <div class="step">
                     <h3><span class="step-number">2</span> Set Up a Subnet</h3>
-                    <ul class="indented-bullets">
-                        <p><strong>Objective:</strong> Create a subnet within the VPC to partition the network for better security and management.</p>
-                    <ul class="indented-bullets">
+                    <p><strong>Objective:</strong> Create a subnet within the VPC to partition the network for better security and management.</p>
+                    <ul>
                         <li>In the AWS Management Console, go to the <strong>VPC Dashboard</strong>.</li>
                         <li>Select <strong>Subnets</strong> and click <strong>Create subnet</strong>.</li>
                         <li>Choose the VPC you created in Step 1 (NextWork VPC).</li>
@@ -463,105 +424,63 @@
                     </ul>
                     <p><strong>Result:</strong> Successfully created the <strong>NextWork Subnet</strong> in the VPC.</p>
                     <div class="code-block">
-                        <pre>
-                        </pre>
+                        <pre></pre>
                     </div>
                     <div class="screenshot">
-                        <img src="Step 2 Subnet Panel.png" alt="Subnet panel" >
+                        <img src="Step 2 Subnet Panel.png" alt="Subnet panel">
                         <div class="screenshot-caption">Subnet Panel.</div>
                     </div>
                 </div>                
 
-                <!--Step 3-->
                 <div class="step">
                     <h3><span class="step-number">3</span> Attach an Internet Gateway</h3>
-                    <ul class="indented-bullets">
-                        <p><strong>Objective:</strong> Enable internet connectivity for the VPC by attaching an Internet Gateway (IGW).</p>
-                        <ul class="indented-bullets">
-                            <li>In the <strong>VPC Dashboard</strong>, select <strong>Internet Gateways</strong>.</li>
-                            <li>Click <strong>Create internet gateway</strong>, and provide a name (e.g., <strong>NextWork IGW</strong>).</li>
-                            <li>After creation, select the <strong>NextWork IGW</strong>, and click <strong>Actions</strong> > <strong>Attach to VPC</strong>.</li>
-                            <li>Choose the <strong>NextWork VPC</strong> and click <strong>Attach</strong>.</li>
-                        </ul>
-                        <p><strong>Result:</strong> Successfully attached the <strong>Internet Gateway</strong> to the <strong>NextWork VPC</strong>, enabling internet access for resources within the VPC.</p>
+                    <p><strong>Objective:</strong> Enable internet connectivity for the VPC by attaching an Internet Gateway (IGW).</p>
+                    <ul>
+                        <li>In the <strong>VPC Dashboard</strong>, select <strong>Internet Gateways</strong>.</li>
+                        <li>Click <strong>Create internet gateway</strong>, and provide a name (e.g., <strong>NextWork IGW</strong>).</li>
+                        <li>After creation, select the <strong>NextWork IGW</strong>, and click <strong>Actions</strong> > <strong>Attach to VPC</strong>.</li>
+                        <li>Choose the <strong>NextWork VPC</strong> and click <strong>Attach</strong>.</li>
+                    </ul>
+                    <p><strong>Result:</strong> Successfully attached the <strong>Internet Gateway</strong> to the <strong>NextWork VPC</strong>, enabling internet access for resources within the VPC.</p>
                     <div class="code-block">
-                        <pre>
-                        </pre>
+                        <pre></pre>
                     </div>
                     <div class="screenshot">
-                        <img src="Step 3 Internet Gateway Pannel.png" alt="Internet Gateway panel." >
-                        
-                        <div class="screenshot-caption" >Internet Gateway panel.</div>
-                    
+                        <img src="Step 3 Internet Gateway Pannel.png" alt="Internet Gateway panel.">
+                        <div class="screenshot-caption">Internet Gateway panel.</div>
+                    </div>
                 </div>
 
-                <!--Step 4 -->
                 <div class="step">
                     <h3><span class="step-number">4</span> Update Route Table for Internet Access</h3>
-                    <ul class="indented-bullets">
-                        <p><strong>Objective:</strong> Update the route table to direct internet-bound traffic to the newly attached Internet Gateway.</p>
-                    <ul class="indented-bullets">
+                    <p><strong>Objective:</strong> Update the route table to direct internet-bound traffic to the newly attached Internet Gateway.</p>
+                    <ul>
                         <li>In the <strong>VPC Dashboard</strong>, select <strong>Route Tables</strong>.</li>
                         <li>Choose the <strong>default route table</strong> associated with your VPC.</li>
                         <li>Click on <strong>Routes</strong> and then <strong>Edit Routes</strong>.</li>
                         <li>Click <strong>Add route</strong>, set the <strong>Destination</strong> to <strong>0.0.0.0/0</strong>, and select the <strong>Target</strong> as the <strong>Internet Gateway (NextWork IGW)</strong>.</li>
                         <li>Save the changes.</li>
                     </ul>
-    <p><strong>Result:</strong> Internet access for the VPC is now configured.</p>
+                    <p><strong>Result:</strong> Internet access for the VPC is now configured.</p>
                     <div class="code-block">
-                        <pre>
-                        </pre>
+                        <pre></pre>
                     </div>
-                    
                 </div>
 
-                
-
-                <!--Step 5-->
                 <div class="step">
                     <h3><span class="step-number">5</span> VPC Fully Connected to the Internet</h3>
-                    <ul class="indented-bullets">
-                        <li><strong>Result:</strong></li></li>Your VPC is now fully internet-enabled, allowing seamless communication with external resources.</li>
-                    </ul>
+                    <p><strong>Result:</strong> Your VPC is now fully internet-enabled, allowing seamless communication with external resources.</p>
                     <div class="code-block">
-                        <pre>
-                        </pre>
+                        <pre></pre>
                     </div>
                     <div class="screenshot">
-                        <img src="VPCFinal.png" alt="VPC and Internet Conversation ">
+                        <img src="VPCFinal.png" alt="VPC and Internet Conversation">
                         <div class="screenshot-caption">A real conversation between the VPC and the Internet.</div>
                     </div>
                 </div>
+            </section>
 
-               
-
-                
-
-            <!--Results Pane-->
             <section class="results">
                 <h2>Project Results</h2>
                 <ul>
-                    <li>The NextWork VPC was successfully configured with an internet gateway, subnet, and updated route table, ensuring secure and reliable external connectivity for cloud resources and applications. This setup provides a robust foundation for scalable, cloud-based networking.
-
-                    </li>
-                    
-                </ul>
-            </section>
-        </article>
-
-       
-    </main>
-
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                    <li>The NextWork VPC was successfully configured with an internet gateway, subnet, and updated route table, ensuring secure and reliable external connectivity for cloud resources and applications. This setup provides a robust
