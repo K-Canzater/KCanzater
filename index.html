@@ -99,6 +99,17 @@
             background: linear-gradient(135deg, rgba(44, 62, 80, 0.97), rgba(44, 62, 80, 0.93));
         }
 
+        .aws-service-tag, .tech-tag {
+            background-color: white; /* Background color for the tag */
+            color: var(--primary-color); /* Text color */
+            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
+            border: 2px solid #d3d3d3; /* Greyish border color */
+            border-radius: 20px; /* Round corners */
+            font-size: 0.9rem; /* Font size */
+            font-weight: 500; /* Font weight */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
         .particle-background {
             position: absolute;
             top: 0;
@@ -275,15 +286,15 @@
         }
 
         .aws-service-tag, .tech-tag {
-            background-color: white; /* Background color for the tag */
-            color: var(--primary-color); /* Text color */
-            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
-            border: 2px solid #d3d3d3; /* Greyish border color */
-            border-radius: 20px; /* Round corners */
-            font-size: 0.9rem; /* Font size */
-            font-weight: 500; /* Font weight */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-        }
+    background-color: white; /* Background color for the tag */
+    color: var(--primary-color); /* Text color */
+    padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
+    border: 2px solid #d3d3d3; /* Greyish border color */
+    border-radius: 20px; /* Round corners */
+    font-size: 0.9rem; /* Font size */
+    font-weight: 500; /* Font weight */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
 
         .view-project-btn {
             display: inline-block;
@@ -504,8 +515,7 @@
                             <h3>Host a Website on Amazon S3</h3>
                             <p>A scalable website hosted on Amazon S3 for efficient data storage and easy web access.</p>
                             <div class="tech-tags">
-                                <span class="tech-tag">Amazon S3</span>
-                                
+                                <span class="aws-service-tag">Amazon S3</span>
                             </div>
                             <a href="StaticWebProject.html" class="view-project-btn">View Project</a>
                         </div>
@@ -516,13 +526,17 @@
                             <h3>Build a Virtual Private Cloud</h3>
                             <p>A fully-configured VPC connected to the internet for seamless cloud resource communication.</p>
                             <div class="tech-tags">
-                                <span class="tech-tag">Amazon VPC (Virtual Private Cloud)</span>
-                                <span class="tech-tag">Internet Gateway</span>
-                                <span class="tech-tag">Subnets</span>
+                                <span class="aws-service-tag">Amazon VPC (Virtual Private Cloud)</span>
+                                <span class="aws-service-tag">Internet Gateway</span>
+                                <span class="aws-service-tag">Subnets</span>
                             </div>
-                            <a href= "BuildVPCProject.html" class="view-project-btn">View Project</a>
+                            <a href="BuildVPCProject.html" class="view-project-btn">View Project</a>
                         </div>
                     </div>
+                </div>
+                <!-- View All Projects Button -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="Projects.html" class="view-project-btn">View All Projects</a>
                 </div>
             </div>
         </section>
