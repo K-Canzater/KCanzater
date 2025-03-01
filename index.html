@@ -159,12 +159,15 @@
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+             font-size: 4.5rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
             font-weight: 800;
             letter-spacing: -1px;
             animation: fadeInUp 0.8s ease-out;
+            background: linear-gradient(90deg, var(--accent-color), #FF5733); /* Gradient red-orange */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Makes gradient visible */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
         }
 
         @keyframes fadeInUp {
