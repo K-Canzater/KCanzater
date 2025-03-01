@@ -278,6 +278,19 @@
             font-weight: 700;
         }
 
+        .expertise-list {
+            list-style: none; /* Removes default bullet points */
+            padding-left: 0;  /* Removes extra left padding */
+        }
+
+        .expertise-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Adds spacing between the checkmark and text */
+            font-size: 1.1rem; /* Slightly bigger text for readability */
+        }
+
+
         .tech-tags {
             display: flex;
             gap: 0.5rem;
@@ -496,7 +509,7 @@
         </p>
         <p>
             My expertise includes:
-            <ul>
+            <ul class="expertise-list">
                 <li>✅ <strong>Automating AWS infrastructure</strong> (IAM, EC2, S3, VPC)</li>
                 <li>✅ <strong>CI/CD deployment pipelines</strong> using <strong>GitHub Actions</strong></li>
                 <li>✅ <strong>Terraform for infrastructure as code (IaC)</strong></li>
