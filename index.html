@@ -154,9 +154,11 @@
             height: 100%;
         }
 
-        .hero-main {
-            text-align: center;
-        }
+        .hero-main h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+    }
 
         .hero h1 {
              font-size: 4.5rem;
@@ -191,25 +193,30 @@
 
         .hero-tags {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.4;
         }
 
         .hero-tags span {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: #f9f9f9;
+            padding: 0.4rem 1.2rem;
             border-radius: 50px;
             font-size: 1rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
         .hero-tags span:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
         }
 
@@ -529,23 +536,25 @@
     </header>
 
     <main>
-        <!-- Replace the existing hero section with this -->
         <section class="hero">
-            <div class="particle-background"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-main">
-                        <h1>Khayla Canzater</h1>
-                        <p class="title">🚀 Cloud Infrastructure Engineer | AWS Automation & DevOps</p>
-                        <div class="hero-tags">
-                            <span>AWS Automation with Boto3 & Terraform</span>
-                            <span>CI/CD Deployment with GitHub Actions</span>
-                            <span>AWS Infrastructure: IAM, EC2, S3, and VPC Management</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+             <div class="particle-background"></div>
+             <div class="container">
+             <div class="hero-content">
+             <div class="hero-main">
+               <h1>Khayla Canzater</h1>
+               <p class="title">
+                  🚀 Cloud Infrastructure Engineer specializing in AWS Automation & DevOps
+               </p>
+               <div class="hero-tags">
+                 <span>AWS Automation with Boto3 & Terraform</span>
+                 <span>CI/CD Deployment with GitHub Actions</span>
+                 <span>AWS Infrastructure: IAM, EC2, S3, & VPC Management</span>
+             </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <section id="about">
   <div class="container">
