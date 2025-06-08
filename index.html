@@ -444,14 +444,14 @@
         }
 
         .project-card {
-            background: white;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-            group: hover;
+            background: rgba(255, 255, 255, 0.25); /* glass-like */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 200, 200, 0.3); /* stronger than default */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* soft lift */
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
         }
 
         .project-card::before {
@@ -962,7 +962,8 @@
         </section>
 
         <!-- View All Projects Button -->
-        <div style="text-align: center; margin-top: 2rem;">
+            <div style="text-align: center; margin-top: 2rem;">
+
             <a href="Projects.html" class="view-project-btn">
                 <span>View All Projects</span>
             </a>
