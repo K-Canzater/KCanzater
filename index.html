@@ -185,6 +185,11 @@
             animation: floatParticles 20s linear infinite;
         }
 
+        .hero-particles,
+        .hero-particles canvas {
+            pointer-events: none !important;
+        }
+
         @keyframes floatParticles {
             0% {
                 transform: translate(0, 0) rotate(0deg);
