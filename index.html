@@ -593,10 +593,10 @@
         }
 
         .skill-item {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             /* Light shadow */
 
             padding: 2rem;
@@ -784,6 +784,17 @@
             box-shadow: var(--shadow-glow);
         }
 
+        @media (max-width: 600px) {
+            .resume-button {
+                margin-bottom: 2.5rem;
+            }
+
+            .hero-content {
+                padding: 2rem 1rem;
+            }
+        }
+
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -861,19 +872,24 @@
             }
 
             .btn-primary {
-                .btn-primary {
-                    background-color: #00bcd4 !important;
-                    color: white !important;
-                    padding: 0.6rem 1.4rem !important;
-                    border-radius: 30px !important;
-                    text-decoration: none !important;
-                    font-weight: 600 !important;
-                    font-size: 1rem !important;
-                    transition: background-color 0.3s ease !important;
-                    display: inline-block !important;
-                }
-
+                background-color: #00bcd4;
+                color: white;
+                padding: 0.6rem 1.4rem;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                transition: background-color 0.3s ease;
+                display: inline-block;
             }
+
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+            }
+
 
             .btn-primary:hover {
                 background-color: #0093aa;
@@ -942,7 +958,7 @@
                 </div>
 
                 <div class="resume-button">
-                    <a href="Khayla_Canzater_Resume.pdf" download
+                    <a href="K_Canzater_Resume.pdf" download
                         style="background-color:#00bcd4;color:white;padding:0.6rem 1.4rem;border-radius:30px;text-decoration:none;font-weight:600;display:inline-block;">
                         📄 Download Resume
                     </a>
@@ -1026,9 +1042,10 @@
                                 <span class="tech-tag">S3</span>
                                 <span class="tech-tag">IAM</span>
                             </div>
-                            <a href="InfraAutomation.html" class="view-project-btn">
-                                <span>View Project</span>
+                            <a href="InfraAutomation.html" class="btn-primary">
+                                View Project
                             </a>
+
                         </div>
                     </div>
 
@@ -1058,13 +1075,12 @@
                     </div>
                 </div> <!-- End of .featured-projects -->
 
-                <!-- ✅ Properly centered button below the grid -->
                 <div style="text-align: center; margin-top: 2rem;">
-
-                    <a href="Projects.html" class="view-project-btn">
-                        <span>View All Projects</span>
+                    <a href="Projects.html" class="btn-primary">
+                        📁 View All Projects
                     </a>
                 </div>
+
 
             </div> <!-- End of .container -->
         </section>
