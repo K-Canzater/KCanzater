@@ -3,791 +3,613 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infrastructure Automation - Khayla Canzater</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Build a Virtual Private Cloud with AWS CLI - Your Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Base styles - keeping consistency with main site but we can change colors */
         :root {
-            --primary-dark: #1a1a2e;
-            --primary-purple: #16213e;
-            --accent-pink: #e94560;
-            --accent-cyan: #0f4c75;
-            --text-light: #f5f5f5;
-            --text-dark: #333;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --primary-color: #2C3E50;     /* Deep Blue */
+            --secondary-color: #1ABC9C;    /* Turquoise */
+            --accent-color: #E74C3C;       /* Coral Red */
+            --text-color: #2C3E50;         /* Deep Blue */
+            --bg-color: #ECF0F1;           /* Light Gray */
+            --section-bg: #F7F7F9;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --code-bg: #F8F9FA;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--primary-dark);
-            color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--bg-color);
         }
 
-        /* Navigation */
-        .navbar {
+        /* Navigation styling remains the same */
+        header {
+            background-color: rgba(44, 62, 80, 0.98);
+            padding: 1rem 0;
             position: fixed;
-            top: 0;
             width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s;
         }
 
-        .nav-container {
+        header:hover {
+            background-color: rgba(44, 62, 80, 1);
+        }
+
+        nav {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent-color);
+            font-size: 1.75rem;
+            font-weight: bold;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-2);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Back Button */
-        .back-btn {
-            position: fixed;
-            top: 100px;
-            left: 2rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-2);
-            border: none;
             color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3);
-            transition: all 0.3s ease;
-            z-index: 999;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
-        .back-btn:hover {
+        .nav-links a:hover {
+            color: var(--accent-color);
             transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(233, 69, 96, 0.5);
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-purple) 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(120deg); }
-            66% { transform: translateY(20px) rotate(240deg); }
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: slideInUp 1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            animation: slideInUp 1s ease-out 0.3s both;
-        }
-
-        .hero-badges {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-            animation: slideInUp 1s ease-out 0.6s both;
-        }
-
-        .badge {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .tech-tags {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideInUp 1s ease-out 0.9s both;
-        }
-
-        .tech-tag {
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .tech-tag:nth-child(odd) {
-            background: var(--gradient-1);
-        }
-
-        .tech-tag:nth-child(even) {
-            background: var(--gradient-3);
-        }
-
-        .tech-tag:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 6rem 2rem;
+        /* Project content specific styles */
+        .project-container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
         }
 
-        .section {
-            margin-bottom: 6rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
+        .project-header {
             text-align: center;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
+            margin-bottom: 3rem;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gradient-2);
-            border-radius: 2px;
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
-        /* Overview Section */
-        .overview-grid {
+        .project-overview {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .overview-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        @media (max-width: 768px) {
+            .project-overview {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .overview-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .overview-content strong {
-            color: #fff;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .architecture-preview {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+        .project-details {
+            background: white;
             padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-meta {
+            background: var(--section-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            height: fit-content;
+        }
+
+        .aws-services {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .aws-service-tag {
+            background-color: white; /* Background color for the tag */
+            color: var(--primary-color); /* Text color */
+            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
+            border: 2px solid #d3d3d3; /* Greyish border color */
+            border-radius: 20px; /* Round corners */
+            font-size: 0.9rem; /* Font size */
+            font-weight: 500; /* Font weight */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        }
+
+        .project-links {
+            margin-top: 1rem;
+        }
+
+        .project-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s;
         }
 
-        .architecture-preview img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 1rem;
+        .project-links a:hover {
+            opacity: 0.9;
         }
 
-        .architecture-preview h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: var(--gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .note-box {
+            background-color: #fef9c3;
+            border-left: 5px solid #facc15;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+            border-radius: 6px;
         }
 
-        /* Implementation Steps */
-        .steps-container {
-            display: grid;
-            gap: 3rem;
-        }
-
-        .step-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .step-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-2);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .step-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .step-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .step-header {
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-cyan));
+        /* Architecture diagram section */
+        .architecture {
+            margin: 3rem 0;
             padding: 2rem;
-            position: relative;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .architecture img {
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem 0;
+        }
+
+        .architecture-list {
+            list-style-type: disc;
+            margin-left: 2rem;
+            padding-left: 0;
+        }
+
+        .architecture-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Implementation steps */
+        .implementation-steps {
+            margin: 3rem 0;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .step h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .step-number {
-            position: absolute;
-            top: -15px;
-            left: 2rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-2);
+            background: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: white;
-            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+            border-radius: 50%;
         }
 
-        .step-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            margin-left: 4rem;
-            color: white;
+        .step ul {
+            list-style-type: disc;
+            margin-left: 2rem;
         }
 
-        .step-description {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-left: 4rem;
-            color: var(--text-light);
-        }
-
-        .step-content {
-            padding: 2.5rem;
-        }
-
-        .step-content p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .step-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .step-content li {
-            background: rgba(102, 126, 234, 0.1);
-            border-left: 4px solid #667eea;
+        .code-block {
+            background: var(--code-bg);
             padding: 1rem;
-            margin-bottom: 0.8rem;
-            border-radius: 0 10px 10px 0;
-            font-weight: 500;
-            color: var(--text-light);
-            transition: all 0.3s ease;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow-x: auto;
         }
 
-        .step-content li:hover {
-            background: rgba(102, 126, 234, 0.2);
-            transform: translateX(5px);
-        }
-
-        .step-content li::before {
-            content: "▶";
-            color: #667eea;
-            font-weight: bold;
-            margin-right: 0.8rem;
-        }
-
-        /* Image Gallery */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        /* Screenshots */
+        .screenshot {
             margin: 2rem 0;
-        }
-
-        .gallery-item {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .gallery-item img {
+        .screenshot img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 300px; /* Fixed height for consistency */
+            object-fit: cover; /* This keeps aspect ratio while filling the space */
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .gallery-caption {
+        .screenshot img:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-caption {
+            background: var(--section-bg);
             padding: 1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            text-align: center;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 0.9rem;
+            color: var(--text-color);
         }
 
-        /* Results Section */
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        /* Results section */
+        .results {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 3rem 0;
         }
 
-        .result-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+        .results ul {
+            list-style-type: none;
+            margin: 1rem 0;
         }
 
-        .result-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .result-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .result-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .results li {
             margin-bottom: 1rem;
-            color: white;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        .result-description {
-            color: var(--text-light);
-            opacity: 0.8;
-            line-height: 1.6;
+        .results li::before {
+            content: "✓";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
         }
 
-        /* Animations */
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Navigation sidebar */
+        .project-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+
+        @media (min-width: 1400px) {
+            .project-nav {
+                display: block;
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+        .project-nav ul {
+            list-style: none;
+        }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
+        .project-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
+        .project-nav a:hover {
+            background-color: var(--section-bg);
+        }
 
-            .overview-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+        /* Modal styling for image enlargement */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1500;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            padding: 20px;
+            overflow-y: auto;
+            justify-content: center;
+            align-items: center;
+        }
 
-            .main-content {
-                padding: 4rem 1.5rem;
-            }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
 
-            .back-btn {
-                left: 1rem;
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
-            }
-
-            .step-title {
-                font-size: 1.4rem;
-            }
-
-            .step-description {
-                font-size: 1rem;
-            }
-
-            .image-gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .tech-tags {
-                gap: 0.5rem;
-            }
-
-            .tech-tag {
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
-            }
+        .close {
+            position: fixed;
+            right: 25px;
+            top: 10px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1600;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Khayla Canzater</a>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="index.html#experience">Experience</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fab fa-aws"></i>
+                Khayla Canzater
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="Projects.html">Projects</a>
+                <a href="index.html#about">About</a>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Back Button -->
-    <button class="back-btn" onclick="window.location.href='index.html'">
-        <i class="fas fa-arrow-left"></i>
-    </button>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">☁️ AWS Infrastructure Automation</h1>
-            <p class="hero-subtitle">Building scalable cloud infrastructure with modern DevOps practices</p>
-            
-            <div class="hero-badges">
-                <span class="badge">⚡ 80% Faster Deployments</span>
-                <span class="badge">🔒 Zero-Downtime Pipeline</span>
-                <span class="badge">📊 100% IaC Implementation</span>
+    <main class="project-container">
+        <article class="project-content">
+            <div class="project-header">
+                <h1>☁️ AWS Infrastructure Automation with Terraform, GitHub Actions & Boto3</h1>
+                <p>A comprehensive project demonstrating the automation of AWS infrastructure using Terraform, continuous deployment with GitHub Actions, and resource management through Python scripts utilizing Boto3.​</p>
             </div>
 
-            <div class="tech-tags">
-                <span class="tech-tag">Terraform</span>
-                <span class="tech-tag">GitHub Actions</span>
-                <span class="tech-tag">Python (Boto3)</span>
-                <span class="tech-tag">AWS VPC</span>
-                <span class="tech-tag">EC2</span>
-                <span class="tech-tag">S3</span>
-                <span class="tech-tag">IAM</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Project Overview -->
-        <section class="section">
-            <h2 class="section-title">Project Overview</h2>
-            <div class="overview-grid">
-                <div class="overview-content">
-                    <p>
-                        This project demonstrates a complete <strong>end-to-end automation workflow</strong> for AWS infrastructure provisioning and management. By combining Terraform for Infrastructure as Code (IaC), GitHub Actions for continuous deployment, and Boto3 for resource management, I built a production-ready DevOps pipeline that eliminates manual intervention.
-                    </p>
-                    <p>
-                        The solution automates the entire lifecycle of cloud resources — from initial provisioning to ongoing management — showcasing real-world cloud engineering practices that reduce deployment time by 80% while maintaining security and reliability standards.
-                    </p>
-                    <p>
-                        <strong>Key Achievement:</strong> Created a fully automated, scalable infrastructure deployment system that can be replicated across multiple environments with zero manual configuration.
-                    </p>
+            <div class="project-overview">
+                <div class="project-details">
+                    <h2>Project Overview</h2>
+                    <p>In this project, I automated the provisioning and management of AWS resources to simulate real-world cloud engineering workflows. Utilizing Terraform for Infrastructure as Code (IaC), GitHub Actions for continuous integration and deployment, and Boto3 for scripting AWS resource management, this project showcases a full-cycle DevOps approach.​ </p>
+                    
+                    <div class="aws-services">
+                        <span class="aws-service-tag">Terraform</span>
+                        <span class="aws-service-tag">GitHub Actions</span>
+                        <span class="aws-service-tag">AWS (VPC, EC2, S3, IAM)</span>
+                        <span class="aws-service-tag">Python</span>
+                        <span class="aws-service-tag">Boto3</span>
+                    </div>
                 </div>
-                <div class="architecture-preview">
-                    <img src="automationproject.png" alt="Infrastructure Architecture" />
-                    <h3>🏗️ Complete Architecture Overview</h3>
+
+                <div class="project-meta">
+                    <h3>Project Details</h3>
+                    <ul>
+                        <li><strong>Status:</strong> Completed</li>
+                        <li><strong>Repo:</strong> <a href="https://github.com/K-Canzater/AWS-Infrastructure-Automation-with-Terraform-GitHub-Actions-Boto3" target="_blank" class="repo-link"><i class="fab fa-github"></i> View on GitHub</a></li>
+
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- Implementation Steps -->
-        <section class="section">
-            <h2 class="section-title">Implementation Journey</h2>
-            <div class="steps-container">
+            <section class="architecture">
+                <h2>Architecture Overview</h2>
+                <img src="automationproject.png" alt="Architecture Diagram">
+                <p>The architecture comprises a VPC with public and private subnets, an internet gateway, route tables, and security groups. An EC2 instance resides within the public subnet, and an S3 bucket is configured for storage needs. IAM roles and policies are established to manage permissions. GitHub Actions automates the deployment process, while Boto3 scripts handle resource management post-deployment.​</p>
                 
-                <!-- Step 1: Terraform Infrastructure -->
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">1</div>
-                        <h3 class="step-title">🏗️ Infrastructure as Code with Terraform</h3>
-                        <p class="step-description">Built comprehensive AWS infrastructure using Terraform configurations</p>
-                    </div>
-                    <div class="step-content">
-                        <p>
-                            Designed and implemented a comprehensive Terraform configuration that provisions a production-ready AWS environment. The infrastructure includes networking, compute, storage, and security components with proper resource dependencies and variable management.
-                        </p>
-                        <ul>
-                            <li>Configured VPC with public/private subnets across multiple AZs</li>
-                            <li>Implemented route tables and internet gateway for proper networking</li>
-                            <li>Set up security groups with least-privilege access principles</li>
-                            <li>Provisioned EC2 instances with proper IAM roles and policies</li>
-                            <li>Created S3 buckets with versioning and encryption enabled</li>
-                            <li>Utilized variables and modules for scalable, reusable infrastructure</li>
-                        </ul>
-                        
-                        <div class="image-gallery">
-                            <div class="gallery-item">
-                                <img src="Terraform Structure.png" alt="Terraform Structure" />
-                                <div class="gallery-caption">📁 Terraform Project Structure</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="VPC Code Snippets.png" alt="VPC Configuration" />
-                                <div class="gallery-caption">🌐 VPC Configuration Code</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="EC2 Code snippets.png" alt="EC2 Configuration" />
-                                <div class="gallery-caption">💻 EC2 Instance Configuration</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </section>
+            
+            <section class="implementation-steps">
+                <h2>Implementation Steps</h2>
 
-                <!-- Step 2: GitHub Actions CI/CD -->
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">2</div>
-                        <h3 class="step-title">🚀 CI/CD Pipeline with GitHub Actions</h3>
-                        <p class="step-description">Automated deployment pipeline with continuous integration</p>
+                <div class="step">
+                    <h3><span class="step-number">1</span> Set Up AWS Infrastructure with Terraform:</h3>
+                    <ul>
+                        <li>Defined VPC, subnets, route tables, internet gateway, security groups, EC2 instance, S3 bucket, and IAM roles in Terraform configuration files.​</li>
+                        <li>Utilized variables for dynamic configuration and scalability.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre></pre>
                     </div>
-                    <div class="step-content">
-                        <p>
-                            Created a robust GitHub Actions workflow that automatically triggers on code commits, executing the complete Terraform deployment pipeline. The workflow includes proper secret management, state handling, and error recovery mechanisms.
-                        </p>
-                        <ul>
-                            <li>Configured GitHub Actions workflow with secure AWS credentials</li>
-                            <li>Implemented Terraform init, plan, and apply automation</li>
-                            <li>Set up remote state management with S3 backend</li>
-                            <li>Added proper error handling and rollback mechanisms</li>
-                            <li>Configured repository secrets for secure credential management</li>
-                        </ul>
-                        
-                        <div class="image-gallery">
-                            <div class="gallery-item">
-                                <img src="Github Repo after pushing folders and file setup.png" alt="GitHub Repository" />
-                                <div class="gallery-caption">📂 GitHub Repository Structure</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="Gitub Actions Workflow.png" alt="GitHub Actions Workflow" />
-                                <div class="gallery-caption">✅ Successful Workflow Runs</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="Terraform Plan.png" alt="Terraform Plan" />
-                                <div class="gallery-caption">📋 Terraform Plan Output</div>
-                            </div>
-                        </div>
+                
+                    <!-- Note Section -->
+                    <div class="note-box">
+                        <strong>⚠️ Note:</strong> Only code snippets are shown below for clarity. Full Terraform configurations are available in the project repository.
+                    </div>
+                
+                    <div class="screenshot">
+                        <img src="Terraform Structure.png" alt="My Terraform Setup">
+                        <div class="screenshot-caption">Overview of how configuration files are structured for modular deployment.</div>
+                
+                        <img src="VPC Code Snippets.png" alt="Snippets of VPC Code">
+                        <div class="screenshot-caption">Snippet showing Terraform code used to define a VPC and subnets.</div>
+                
+                        <img src="EC2 Code snippets.png" alt="Snippet of EC2 Instance Code">
+                        <div class="screenshot-caption">Partial code defining an EC2 instance.</div>
+                
+                        <img src="IAM Code Snippets.png" alt=" Snippet of IAM Code">
+                        <div class="screenshot-caption">Snippet showing how an IAM user and group were created, with a policy attached to the group.</div>
+                
+                        <img src="S3 code snippets.png" alt="Snippet of S3 Bucket Code">
+                        <div class="screenshot-caption">Snippet of Terraform resource block for S3 bucket creation.</div>
+                
+                        <img src="Variables.tf code snippets.png" alt="Snippet of variable.tf Code">
+                        <div class="screenshot-caption">Sample variable definitions used for dynamic infrastructure configuration.</div>
                     </div>
                 </div>
+                
 
-                <!-- Step 3: Boto3 Resource Management -->
-                <div class="step-card">
-                    <div class="step-header">
-                        <div class="step-number">3</div>
-                        <h3 class="step-title">🐍 Resource Management with Boto3</h3>
-                        <p class="step-description">Python automation scripts for AWS resource management</p>
-                    </div>
-                    <div class="step-content">
-                        <p>
-                            Developed comprehensive Python scripts using Boto3 to manage AWS resources programmatically. These scripts provide advanced automation capabilities for resource lifecycle management, monitoring, and maintenance tasks.
-                        </p>
-                        <ul>
-                            <li>Created EC2 instance management scripts (start, stop, describe)</li>
-                            <li>Implemented S3 bucket operations (list, upload, delete objects)</li>
-                            <li>Added error handling and logging for production reliability</li>
-                            <li>Integrated with AWS IAM for secure programmatic access</li>
-                            <li>Developed reusable functions for common AWS operations</li>
-                        </ul>
+                <div class="step">
+                    <h3><span class="step-number">2</span> Automate Deployment with GitHub Actions:</h3>
+                    <ul>
+                        <li>Configured GitHub Actions workflow to trigger on code commits.​</li>
+                        <li>Integrated Terraform commands (init, plan, apply) into the CI/CD pipeline for automated infrastructure deployment.​</li>
                         
-                        <div class="image-gallery">
-                            <div class="gallery-item">
-                                <img src="BOTO3 UPDATED EC2 Start Instance code format improved.png" alt="Start Instance Code" />
-                                <div class="gallery-caption">🟢 EC2 Start Instance Script</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="BOTO3 Stop Instance Code format changes.png" alt="Stop Instance Code" />
-                                <div class="gallery-caption">🔴 EC2 Stop Instance Script</div>
-                            </div>
-                            <div class="gallery-item">
-                                <img src="Boto3 Script EC2 Describe Instance Code.png" alt="Describe Instance Code" />
-                                <div class="gallery-caption">📊 EC2 Describe Instance Script</div>
-                            </div>
-                        </div>
+                    </ul>
+                    <div class="code-block">
+                        <pre></pre>
+                    </div>
+                    <div class="screenshot">
+                        <img src="Github Repo after pushing folders and file setup.png" alt="Github Repo">
+                        <div class="screenshot-caption">My Github Repo</div>
+
+                        <img src="Repo Secrets.png" alt="Github Repo Secrets I Set">
+                        <div class="screenshot-caption">Github Repo Secrets I Set.</div>
+
+                        <img src="Gitub Actions Workflow.png" alt="Github Successful workflows">
+                        <div class="screenshot-caption">My Github workflows.</div>
+
+                        <img src="Final Terraform init github.png" alt=" Successfully Initialized">
+                        <div class="screenshot-caption">Terraform has been successfully initialized!</div>
+
+                        <img src="Terraform Plan.png" alt=" Terraform Plan">
+                        <div class="screenshot-caption">Plan preview before resource creation.</div>
+
+                        <img src="Screenshot 2025-04-14 150008.png" alt=" Terraform Apply">
+                        <div class="screenshot-caption">Apply success — resources deployed!</div>
+                    </div>
+                </div>                
+
+                <div class="step">
+                    <h3><span class="step-number">3</span> Manage Resources with Boto3 Scripts:</h3>
+                    <ul>
+                        <li>Developed Python scripts using Boto3 to:​</li>
+                        <li>Start, stop, and describe the EC2 instance.</li>
+                        <li>List and delete objects within the S3 bucket.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre></pre>
+                    </div>
+
+                    <!-- Note Section -->
+                    <div class="note-box">
+                        <strong>Note:</strong> These scripts were written and executed independently to manage AWS resources after deployment. The code shown below is for demonstration purposes and includes key logic snippets.
+                    </div>
+                
+                    <div class="screenshot">
+                        <img src="BOTO3 UPDATED EC2 Start Instance code format improved.png" alt="Start_Instances Code">
+                        <div class="screenshot-caption">Python script that uses Boto3 to start the EC2 instance.</div>
+                
+                        <img src="Boto3 Script EC2 Start Instance AWS Console proof.png" alt="Proof of Instance Started">
+                        <div class="screenshot-caption">The Instance Running.</div>
+                
+                        <img src="BOTO3 Stop Instance Code format changes.png" alt="Stop_Instances Code">
+                        <div class="screenshot-caption">Boto3 script for stopping the EC2 instance gracefully.</div>
+                
+                        <img src="Boto3 EC2 Instance stopping instance proof.png" alt=" Proof of Instance stopped">
+                        <div class="screenshot-caption">The Instance has been Stopped.</div>
+                
+                        <img src="Boto3 Script EC2 Describe Instance Code.png" alt="describe_instances code">
+                        <div class="screenshot-caption">Code snippet to retrieve EC2 instance details such as instance ID, state, and public IP.</div>
+                
+                        <img src="Boto3 EC2 describe instance output.png" alt="describe_instances code output">
+                        <div class="screenshot-caption">The Output of the describe instances code.</div>
+
+                        <img src="BOTO3 object in s3 bucket.png" alt="Object in S3 Bukcet">
+                        <div class="screenshot-caption">Object inside of my S3 Bucket</div>
+
+                        <img src="Boto3 Script S3 List Objects Code.png" alt="list objects in S3 Bucket Code">
+                        <div class="screenshot-caption">Python code to list all objects inside the specified S3 bucket.</div>
+
+                        <img src="Boto3 Delete Objects S3 Code.png" alt="delete objects in S3 Bucket code">
+                        <div class="screenshot-caption">Script using Boto3 to delete all objects in the S3 bucket.</div>
+
+                        <img src="Boto3 S3 delete object deletion proof.png" alt="deleted object in S3 Bucket proof">
+                        <div class="screenshot-caption">The result of deleting the object in the bucket.</div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Results Section -->
-        <section class="section">
-            <h2 class="section-title">Project Impact</h2>
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-icon">⚡</div>
-                    <h3 class="result-title">80% Faster Deployments</h3>
-                    <p class="result-description">Reduced infrastructure deployment time from hours to minutes through complete automation</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-icon">🔒</div>
-                    <h3 class="result-title">Zero-Downtime Pipeline</h3>
-                    <p class="result-description">Implemented blue-green deployment strategies ensuring continuous availability</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-icon">📊</div>
-                    <h3 class="result-title">100% Infrastructure as Code</h3>
-                    <p class="result-description">Complete infrastructure versioning and reproducibility across all environments</p>
-                </div>
-                <div class="result-card">
-                    <div class="result-icon">🛡️</div>
-                    <h3 class="result-title">Enhanced Security</h3>
-                    <p class="result-description">Implemented least-privilege IAM policies and automated security best practices</p>
-                </div>
-            </div>
-        </section>
+            <section class="results">
+                <h2>Project Results</h2>
+                <ul>
+                    <li>Successfully automated the deployment of AWS infrastructure using Terraform and GitHub Actions.​ </li>
+                    <li>Implemented Boto3 scripts for efficient resource management, reducing manual intervention.​​ </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="expandedImg">
     </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Image gallery modal functionality
+        const images = document.querySelectorAll('.screenshot img');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('expandedImg');
+        const closeBtn = document.querySelector('.close');
+
+        // Add click event to all screenshot images
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            });
+        });
+
+        // Close modal when clicking the × button
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = "none";
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === "flex") {
+                modal.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
