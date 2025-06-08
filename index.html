@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,68 +15,94 @@
         }
 
         :root {
-            --primary-color: #2C3E50;     /* Deep Blue */
-            --secondary-color: #1ABC9C;    /* Turquoise */
-            --accent-color: #E74C3C;       /* Coral Red */
-            --text-color: #2C3E50;         /* Deep Blue */
-            --bg-color: #ECF0F1;           /* Light Gray */
-            --section-bg: #F7F7F9;
-            --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --midnight-navy: #0A1628;
+            --electric-cyan: #00D4FF;
+            --coral-primary: #FF6B6B;
+            --coral-secondary: #FF8E8E;
+            --pure-white: #FFFFFF;
+            --cloud-gray: #F8FAFC;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-glow: 0 8px 32px rgba(0, 212, 255, 0.15);
+            --shadow-lift: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         html {
             scroll-behavior: smooth;
         }
 
-        #about p {
-            font-size: 1.2rem; /* Adjust as needed */
-            line-height: 1.6; /* Optional: Improves readability */
-        }
-
-        /* Increase font size for paragraphs in the Projects section */
-        #featured-projects p {
-            font-size: 1.2rem; /* Adjust as needed */
-            line-height: 1.6; /* Optional: Improves readability */
-        }
-         #education p {
-            font-size: 1.2rem; /* Adjust as needed */
-            line-height: 1.6; /* Optional: Improves readability */
-        }
-
-        #education .timeline-item ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-top: 0.5rem;
-  color: #222 !important; 
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-#education .timeline-item ul li {
-  margin-bottom: 0.4rem;
-}
-
-
         body {
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            color: var(--midnight-navy);
+            background: linear-gradient(135deg, var(--cloud-gray) 0%, var(--pure-white) 100%);
+            overflow-x: hidden;
         }
 
-        /* Header styles */
+
+
+
+        /* More professional neutral backgrounds */
+        #skills,
+        #experience,
+        #education {
+            background-color: #f0f2f5;
+            /* soft cool gray */
+        }
+
+
+
+
+
+        /* Floating Contact Button */
+        .floating-contact {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--coral-primary), var(--coral-secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-glow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-contact:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 48px rgba(255, 107, 107, 0.3);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+
+
+
+        /* Header with glass morphism */
         header {
-            background-color: rgba(44, 62, 80, 0.98);
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            transition: background-color 0.3s;
-        }
-
-        header:hover {
-            background-color: rgba(44, 62, 80, 1);
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -88,18 +115,17 @@
         }
 
         .logo {
-            color: var(--accent-color);
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-size: 1.75rem;
-            font-weight: bold;
+            font-weight: 800;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
 
         .logo:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -108,57 +134,69 @@
         }
 
         .nav-links a {
-            color: white;
+            color: var(--pure-white);
             text-decoration: none;
-            transition: color 0.3s, transform 0.3s;
-            font-size: 1rem;
             font-weight: 600;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        /* Hero section */
-        .hero {
-            height: 80vh;
             position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.97), rgba(44, 62, 80, 0.93));
+            transition: all 0.3s ease;
         }
 
-        .aws-service-tag, .tech-tag {
-            background-color: white; /* Background color for the tag */
-            color: var(--primary-color); /* Text color */
-            padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
-            border: 2px solid #d3d3d3; /* Greyish border color */
-            border-radius: 20px; /* Round corners */
-            font-size: 0.9rem; /* Font size */
-            font-weight: 500; /* Font weight */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            transition: width 0.3s ease;
+        }
 
-        .particle-background {
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - The Main Event */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(135deg, var(--midnight-navy) 0%, #1a2f4a 100%);
+            overflow: hidden;
+            padding: 0;
+            /* Ensure no extra spacing */
+        }
+
+        .hero-particles {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 60% 20%, rgba(0, 212, 255, 0.05) 2px, transparent 2px);
+            background-size: 100px 100px, 150px 150px, 200px 200px;
+            animation: floatParticles 20s linear infinite;
         }
 
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        @keyframes floatParticles {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50px, -50px) rotate(360deg);
+            }
         }
 
         .hero-content {
-             display: flex;
+                display: flex;
     flex-direction: column;
     align-items: center;     
     justify-content: center;  
@@ -169,98 +207,150 @@
     height: 100%;
         }
 
-        .hero-main h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-    }
-
         .hero h1 {
-             font-size: 4.5rem;
+            font-size: 4.5rem;
+            font-weight: 900;
             margin-bottom: 1rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            animation: fadeInUp 0.8s ease-out;
-            background: linear-gradient(90deg, var(--accent-color), #FF5733); /* Gradient red-orange */
+            background: linear-gradient(135deg, var(--coral-primary) 0%, var(--electric-cyan) 50%, var(--coral-secondary) 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; /* Makes gradient visible */
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out, shimmer 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.2);
+            }
+        }
+
+        .hero .title {
+            font-size: 1.8rem;
+            color: var(--pure-white);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            opacity: 0.9;
+        }
+
+        .typing-animation {
+            border-right: 2px solid var(--electric-cyan);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                border-color: var(--electric-cyan);
+            }
+
+            51%,
+            100% {
+                border-color: transparent;
+            }
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .learning-badge {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--pure-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learning-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .learning-badge:hover::before {
+            left: 100%;
+        }
+
+        .learning-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .social-hero {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.9s backwards;
+        }
+
+        .social-hero a {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--pure-white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-hero a:hover {
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lift);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .hero .title {
-            font-size: 1.8rem;
-            color: white;
-            margin-bottom: 2rem;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .hero-tags {
-            display: flex;
-            gap: 1.2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .hero-tags span {
-            background: rgba(255, 255, 255, 0.08);
-            color: #f9f9f9;
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .hero-tags span:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .hero .title {
-                font-size: 1.4rem;
-            }
-            
-            .hero-tags span {
-                font-size: 0.9rem;
-                padding: 0.4rem 1.2rem;
-            }
-        }
-
-        /* Main content styles */
+        /* Main Content Sections */
         main {
-            margin-top: 5rem;
+            margin-top: 0;
         }
 
         section {
             padding: 6rem 2rem;
+            position: relative;
         }
 
         section:nth-child(even) {
-            background: linear-gradient(135deg, #f7f7f9, #e6e6e9);
+            background: linear-gradient(135deg, var(--cloud-gray) 0%, rgba(248, 250, 252, 0.5) 100%);
         }
 
         .container {
@@ -269,155 +359,302 @@
         }
 
         h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--midnight-navy), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            border-radius: 2px;
+        }
+
+        /* About Section with Glass Cards */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-content p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--midnight-navy);
+        }
+
+        .about-content strong {
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
 
-        /* Projects section */
+        .stats-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .stat-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--midnight-navy);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Project Cards with Glass Morphism */
         .featured-projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .project-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            group: hover;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lift);
         }
 
         .project-card img {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
         .project-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .project-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .project-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            color: var(--midnight-navy);
             font-size: 1.5rem;
             font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .expertise-list {
-            list-style: none; /* Removes default bullet points */
-            padding-left: 0;  /* Removes extra left padding */
-            margin-top: 15px;  /* Adds space after "My expertise includes:" */
-            margin-bottom: 20px
+        .project-metrics {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--electric-cyan);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
         }
 
-        .expertise-list li {
-            display: flex;
-            align-items: center;
-            gap: 8px; /* Adds spacing between the checkmark and text */
-            font-size: 1.1rem; /* Slightly bigger text for readability */
-            margin-bottom: 10px; 
+        .project-metrics .metric {
+            font-weight: 700;
+            color: var(--midnight-navy);
+            font-size: 1.1rem;
         }
-        p {
-            margin-bottom: 20px;  /* Adds more space between all paragraphs */
-        }
-
 
         .tech-tags {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
-        .aws-service-tag, .tech-tag {
-    background-color: white; /* Background color for the tag */
-    color: var(--primary-color); /* Text color */
-    padding: 0.5rem 1rem; /* Padding for spacing inside the tag */
-    border: 2px solid #d3d3d3; /* Greyish border color */
-    border-radius: 20px; /* Round corners */
-    font-size: 0.9rem; /* Font size */
-    font-weight: 500; /* Font weight */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-}
+        .tech-tag {
+            background: linear-gradient(135deg, var(--coral-primary), var(--coral-secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:nth-child(even) {
+            background: linear-gradient(135deg, var(--electric-cyan), #33E0FF);
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
         .view-project-btn {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--midnight-navy), #2a4a6b);
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            margin-top: 1rem;
-            font-weight: 500;
-            transition: all 0.3s;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-project-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            transition: left 0.3s ease;
+        }
+
+        .view-project-btn:hover::before {
+            left: 0;
+        }
+
+        .view-project-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         .view-project-btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lift);
         }
 
-        /* Skills section */
+        /* Skills Grid with Animations */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .skill-item {
+            .skill-item {
             background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .skill-item:hover::before {
+            animation: shimmerSkill 0.8s ease-in-out;
+        }
+
+
+
+        @keyframes shimmerSkill {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+                opacity: 0;
+            }
         }
 
         .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
         }
 
         .skill-item i {
             font-size: 3rem;
-            color: var(--secondary-color);
             margin-bottom: 1rem;
-            transition: color 0.3s;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
         }
 
         .skill-item:hover i {
-            color: var(--accent-color);
+            transform: scale(1.2);
         }
 
         .skill-item h3 {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
+            color: var(--midnight-navy);
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-   
-}
-
-
-        /* Timeline */
+        /* Timeline with Modern Design */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -425,38 +662,68 @@
         }
 
         .timeline-item {
-            padding: 2rem;
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: rgba(255, 255, 255, 0.25); /* slightly more visible than var(--glass-bg) */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 200, 200, 0.3); /* slightly darker border */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* soft lift */
+    padding: 2.5rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            border-radius: 2px;
         }
 
         .timeline-item:hover {
             transform: translateX(10px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-lift);
         }
 
         .timeline-item h3 {
-            color: var(--primary-color);
+            color: var(--midnight-navy);
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .date {
-            color: var(--secondary-color);
-            font-weight: 500;
-            margin: 0.5rem 0;
-            font-size: 1rem;
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--midnight-navy) 0%, #1a2f4a 100%);
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: floatParticles 15s linear infinite reverse;
         }
 
         .footer-content {
@@ -466,10 +733,12 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
         }
 
@@ -479,16 +748,28 @@
         }
 
         .social-links a {
-            color: var(--accent-color);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
             font-size: 1.5rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
         }
 
         .social-links a:hover {
-            color: white;
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--coral-primary), var(--electric-cyan));
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -497,19 +778,27 @@
             .hero h1 {
                 font-size: 3rem;
             }
-            
+
             .hero .title {
                 font-size: 1.4rem;
             }
-            
-            .hero-tags span {
-                font-size: 0.9rem;
-                padding: 0.4rem 1.2rem;
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .featured-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
 
             .footer-content {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 2rem;
                 text-align: center;
             }
 
@@ -517,32 +806,29 @@
                 padding: 4rem 1.5rem;
             }
 
-            .hero-tags span {
-    display: inline-block;
-    background: var(--secondary-color); /* Turquoise from your theme */
-    padding: 10px 18px;
-    border-radius: 20px;
-    color: #ffffff; /* White text */
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-}
-
-.hero-tags span:hover {
-    background: var(--accent-color); /* Coral Red for contrast on hover */
-    transform: translateY(-2px);
-}
-
-      
+            .floating-contact {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
+
 <body>
+    <!-- Floating Contact Button -->
+    <button class="floating-contact" onclick="window.open('mailto:your.email@example.com', '_blank')">
+        <i class="fas fa-envelope"></i>
+    </button>
+
     <header>
         <nav>
             <a href="#" class="logo">Khayla Canzater</a>
             <div class="nav-links">
                 <a href="#about">About</a>
-                <a href="#featured-projects">Projects</a>
+                <a href="#projects">Projects</a>
                 <a href="#experience">Experience</a>
                 <a href="#education">Education</a>
                 <a href="#skills">Skills</a>
@@ -552,198 +838,240 @@
 
     <main>
         <section class="hero">
-             <div class="particle-background"></div>
-             <div class="container">
-             <div class="hero-content">
-             <div class="hero-main">
-               <h1>Khayla Canzater</h1>
-               <p class="title">
-                  AWS Cloud Engineer | Automating Infrastructure with Terraform, CI/CD & Python
-               </p>
-               
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="hero-particles"></div>
+            <div class="hero-content">
+                <h1>Khayla Canzater</h1>
+                <p class="title">
+                    AWS Cloud Engineer | <span class="typing-animation">Automating Infrastructure with Terraform, CI/CD
+                        & Python</span>
+                </p>
 
-
-        <section id="about">
-  <div class="container">
-    <h2>About Me</h2>
-    <p>
-  I'm a <strong>Cloud Engineer</strong> with a QA background focused on building scalable, secure AWS infrastructure.
-</p>
-<p>
-  I specialize in <strong>Terraform, Python (Boto3), Docker, and Jenkins</strong> — designing infrastructure as code and CI/CD pipelines that automate real-world DevOps workflows.
-</p>
-<p>
-  Whether it's provisioning VPCs, automating EC2 deployments, or securing pipelines with remote state and IAM, I build cloud systems that are production-ready from day one.
-</p>
-<p>
-  Currently leveling up with <strong>Ansible, Helm, and CloudWatch</strong> to deepen my automation and monitoring expertise.
-</p>
-    <div class="social-links">
-      <a href="https://github.com/K-Canzater" target="_blank" aria-label="GitHub">
-    <i class="fab fa-github" style="font-size: 2rem;"></i> <span style="font-weight: bold; font-size: 1rem;">GitHub</span>
-</a>
-
-<a href="https://www.linkedin.com/in/khayla-canzater/" target="_blank" aria-label="LinkedIn">
-    <i class="fab fa-linkedin" style="font-size: 2rem;"></i> <span style="font-weight: bold; font-size: 1rem;">LinkedIn</span>
-</a>
-    </div>
-  </div>
-</section>
-
-
-
-        <section id="featured-projects">
-            <div class="container">
-                <h2>Featured Projects</h2>
-                <div class="featured-projects">
-                    <div class="project-card">
-                        <img src="automationproject.png" alt="Infra Automation Project">
-                        <div class="project-content">
-                            <h3>Automate Cloud Infrastructure with Terraform, GitHub Actions & Boto3</h3>
-                            <p>Automated AWS infrastructure from code to cloud using Terraform, GitHub Actions & Boto3.</p>
-                            <div class="tech-tags">
-                                <span class="aws-service-tag">Terraform</span>
-                                <span class="aws-service-tag">Github Actions</span>
-                                <span class="aws-service-tag">Python (Boto3)</span>
-                                <span class="aws-service-tag">AWS(VPC, EC2, S3, IAM)</span>
-
-                            </div>
-                            <a href="InfraAutomation.html" class="view-project-btn">View Project</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <img src="architectureVPC.png" alt="Container Platform">
-                        <div class="project-content">
-                            <h3>Build a Virtual Private Cloud with AWS CLI</h3>
-                            <p>Created a fully functional VPC with subnets, route tables, and internet access—built entirely with AWS CLI commands.</p>
-                            <div class="tech-tags">
-                                <span class="aws-service-tag">Amazon VPC (Virtual Private Cloud)</span>
-                                <span class="aws-service-tag">Internet Gateway</span>
-                                <span class="aws-service-tag">Subnets</span>
-                                <span class="aws-service-tag">Route Table</span>
-                                <span class="aws-service-tag">Security Groups</span>
-                                <span class="aws-service-tag"> AWS Command Line Interface (AWS CLI)</span>
-                            </div>
-                            <a href="AWSCLI.html" class="view-project-btn">View Project</a>
-                        </div>
-                    </div>
+                <div class="hero-badges">
+                    <span class="learning-badge">🚀 Currently Learning: Ansible & Helm</span>
+                    <span class="learning-badge">⚡ 80% Faster Deployments</span>
+                    <span class="learning-badge">🔒 Security-First Approach</span>
                 </div>
-                <!-- View All Projects Button -->
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="Projects.html" class="view-project-btn">View All Projects</a>
+
+                <div class="social-hero">
+                    <a href="https://github.com/K-Canzater" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/khayla-canzater/" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="skills">
-    <div class="container">
-        <h2>Skills & Tools</h2>
-        <div class="skills-grid">
-            <div class="skill-item">
-                <i class="fas fa-cloud"></i>
-                <h3>Cloud Automation</h3>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-grid">
+                    <div class="about-content">
+                        <p>
+                            I'm a <strong>Cloud Engineer</strong> with a QA background focused on building scalable,
+                            secure AWS infrastructure that actually works in the real world.
+                        </p>
+                        <p>
+                            I specialize in <strong>Terraform, Python (Boto3), Docker, and Jenkins</strong> — designing
+                            infrastructure as code and CI/CD pipelines that eliminate manual work and reduce deployment
+                            times by up to 80%.
+                        </p>
+                        <p>
+                            Whether it's provisioning VPCs, automating EC2 deployments, or securing pipelines with
+                            remote state and IAM, I build cloud systems that are production-ready from day one.
+                        </p>
+                        <p>
+                            Currently leveling up with <strong>Ansible, Helm, and CloudWatch</strong> to deepen my
+                            automation and monitoring expertise.
+                        </p>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stat-item">
+                            <div class="stat-number">80%</div>
+                            <div class="stat-label">Faster Deployments</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">AWS Services</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Infrastructure as Code</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="skill-item">
-                <i class="fas fa-cogs"></i>
-                <h3>Infrastructure as Code</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-tools"></i>
-                <h3>Terraform</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-docker"></i>
-                <h3>Docker</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-dharmachakra"></i>
-                <h3>Kubernetes</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-cubes"></i>
-                <h3>Helm</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-jenkins"></i>
-                <h3>Jenkins</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-cog"></i>
-                <h3>Ansible</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-linux"></i>
-                <h3>Linux</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-git-alt"></i>
-                <h3>Git/GitHub</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-terminal"></i>
-                <h3>PowerShell & Bash</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-cloud"></i>
-                <h3>AWS CLI</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-python"></i>
-                <h3>Python & Boto3</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-user-shield"></i>
-                <h3>IAM</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-server"></i>
-                <h3>EC2</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-database"></i>
-                <h3>Amazon RDS</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-box"></i>
-                <h3>S3</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-network-wired"></i>
-                <h3>VPC</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-chart-line"></i>
-                <h3>CloudWatch</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-search"></i>
-                <h3>CloudTrail</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-chart-area"></i>
-                <h3>Prometheus</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-chart-bar"></i>
-                <h3>Grafana</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-bolt"></i>
-                <h3>Lambda</h3>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Security</h3>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
+        <section id="projects">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="featured-projects">
+                    <div class="project-card">
+                        <img src="automationproject.png"
+                            alt="Infra Automation Project">
+                        <div class="project-content">
+                            <h3>Automate Cloud Infrastructure with Terraform, GitHub Actions & Boto3</h3>
+                            <div class="project-metrics">
+                                <div class="metric">⚡ Reduced deployment time by 80%</div>
+                                <div class="metric">🔒 Zero-downtime deployments</div>
+                                <div class="metric">📊 100% infrastructure as code</div>
+                            </div>
+                            <p>Built a complete CI/CD pipeline that automatically provisions AWS infrastructure using
+                                Terraform and GitHub Actions, with Python Boto3 for advanced automation tasks.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Terraform</span>
+                                <span class="tech-tag">GitHub Actions</span>
+                                <span class="tech-tag">Python (Boto3)</span>
+                                <span class="tech-tag">AWS VPC</span>
+                                <span class="tech-tag">EC2</span>
+                                <span class="tech-tag">S3</span>
+                                <span class="tech-tag">IAM</span>
+                            </div>
+                            <a href="InfraAutomation.html" class="view-project-btn">
+                                <span>View Project</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src= "architectureVPC.png"
+                            alt="VPC Architecture">
+                        <div class="project-content">
+                            <h3>Build a Virtual Private Cloud with AWS CLI</h3>
+                            <div class="project-metrics">
+                                <div class="metric">🏗️ Multi-AZ architecture</div>
+                                <div class="metric">🛡️ Advanced security groups</div>
+                                <div class="metric">⚡ Auto-scaling ready</div>
+                            </div>
+                            <p>Created a production-ready VPC with subnets, route tables, internet gateways, and
+                                security groups — built entirely with AWS CLI commands for maximum reproducibility.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">AWS VPC</span>
+                                <span class="tech-tag">Internet Gateway</span>
+                                <span class="tech-tag">Subnets</span>
+                                <span class="tech-tag">Route Tables</span>
+                                <span class="tech-tag">Security Groups</span>
+                                <span class="tech-tag">AWS CLI</span>
+                            </div>
+                            <a href="AWSCLI.html" class="view-project-btn">
+                                <span>View Project</span>
+                            </a>
+                        </div>
+                    </div>
+        </section>
+
+        <!-- View All Projects Button -->
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="Projects.html" class="view-project-btn">
+                <span>View All Projects</span>
+            </a>
+        </div>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Skills & Tools</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fas fa-cloud"></i>
+                        <h3>Cloud Automation</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Infrastructure as Code</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-tools"></i>
+                        <h3>Terraform</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <h3>Python & Boto3</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-docker"></i>
+                        <h3>Docker</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-jenkins"></i>
+                        <h3>Jenkins</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cog"></i>
+                        <h3>Ansible</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cubes"></i>
+                        <h3>Helm</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-dharmachakra"></i>
+                        <h3>Kubernetes</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-linux"></i>
+                        <h3>Linux</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-git-alt"></i>
+                        <h3>Git & GitHub</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-terminal"></i>
+                        <h3>PowerShell & Bash</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-cloud"></i>
+                        <h3>AWS CLI</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Amazon VPC</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-server"></i>
+                        <h3>EC2</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-box"></i>
+                        <h3>S3</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <h3>Amazon RDS</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>IAM</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>CloudWatch</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-search"></i>
+                        <h3>CloudTrail</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-chart-area"></i>
+                        <h3>Prometheus</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Grafana</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Lambda</h3>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="experience">
             <div class="container">
@@ -756,30 +1084,30 @@
                     <div class="timeline-item">
                         <h3>QA Engineer (Cloud & API Testing)</h3>
                         <p class="date">2020 - 2022</p>
-                        
+
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="education">
-  <div class="container">
-    <h2>Education</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Bachelor of Science in Management Information Systems (Magna Cum Laude)</h3>
-        <p class="date">Graduated: December 2024</p>
-        <ul>
-          <li>Focus: Cloud Computing, IT Infrastructure, Business Process Optimization</li>
-          <li>Dean’s List honors for academic excellence</li>
-          <li>Hands-on experience with cloud tools, network configuration, and automation</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="container">
+                <h2>Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Bachelor of Science in Management Information Systems (Magna Cum Laude)</h3>
+                        <p class="date">Graduated: December 2024</p>
+                        <ul>
+                            <li>Focus: Cloud Computing, IT Infrastructure, Business Process Optimization</li>
+                            <li>Dean’s List honors for academic excellence</li>
+                            <li>Hands-on experience with cloud tools, network configuration, and automation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        
+
     </main>
 
     <footer>
@@ -787,7 +1115,8 @@
             <p>&copy; 2024 Khayla Canzater. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://github.com/K-Canzater" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/khayla-canzater/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/khayla-canzater/" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
@@ -804,4 +1133,5 @@
         });
     </script>
 </body>
+
 </html>
