@@ -34,7 +34,7 @@
         body {
             line-height: 1.6;
             color: #1e293b;
-            background:  linear-gradient(135deg, #f3f4f6 0%, #e8edf3 100%);
+            background: linear-gradient(135deg, #f3f4f6 0%, #e8edf3 100%);
             overflow-x: hidden;
         }
 
@@ -589,7 +589,8 @@
             background: white;
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Light shadow */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            /* Light shadow */
 
             padding: 2rem;
             border-radius: 20px;
@@ -842,6 +843,29 @@
                 background-color: #0056b3;
             }
 
+            .resume-button {
+                margin: 1.5rem 0;
+                text-align: center;
+            }
+
+            .btn-primary {
+                background-color: #00bcd4;
+                /* cyan */
+                color: white;
+                padding: 0.6rem 1.4rem;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                transition: background-color 0.3s ease;
+                display: inline-block;
+            }
+
+            .btn-primary:hover {
+                background-color: #0093aa;
+                /* darker cyan on hover */
+            }
+
 
         }
     </style>
@@ -880,6 +904,12 @@
                     <span class="learning-badge">🚀 Currently Learning: Ansible & Helm</span>
                     <span class="learning-badge">⚡ 80% Faster Deployments</span>
                     <span class="learning-badge">🔒 Security-First Approach</span>
+                </div>
+
+                <div class="resume-button">
+                    <a href="K_Canzater_Resume.pdf" download class="btn-primary">
+                        📄 Download Resume
+                    </a>
                 </div>
 
                 <div class="social-hero">
