@@ -196,15 +196,15 @@
         }
 
         .hero-content {
-                display: flex;
-    flex-direction: column;
-    align-items: center;     
-    justify-content: center;  
-    text-align: center;       
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
         }
 
         .hero h1 {
@@ -342,7 +342,7 @@
         /* Main Content Sections */
         main {
             padding-top: 80px;
-            width: 100%;      
+            width: 100%;
         }
 
         section {
@@ -357,7 +357,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-             padding: 0 1.5rem;
+            padding: 0 1.5rem;
         }
 
         h2 {
@@ -444,14 +444,17 @@
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.25); /* glass-like */
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(200, 200, 200, 0.3); /* stronger than default */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* soft lift */
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    position: relative;
+            background: rgba(255, 255, 255, 0.35);
+            /* glass-like */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            /* stronger than default */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            /* soft lift */
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
         }
 
         .project-card::before {
@@ -575,7 +578,7 @@
             box-shadow: var(--shadow-lift);
         }
 
-         .skills-grid {
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
@@ -661,15 +664,18 @@
         }
 
         .timeline-item {
-            background: rgba(255, 255, 255, 0.25); /* slightly more visible than var(--glass-bg) */
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(200, 200, 200, 0.3); /* slightly darker border */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* soft lift */
-    padding: 2.5rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-    position: relative;
+            background: rgba(255, 255, 255, 0.25);
+            /* slightly more visible than var(--glass-bg) */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            /* slightly darker border */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            /* soft lift */
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .timeline-item::before {
@@ -812,6 +818,29 @@
                 height: 50px;
                 font-size: 1.2rem;
             }
+
+            .projects-button {
+                text-align: center;
+                margin-top: 2rem;
+                /* adds some space above the button */
+            }
+
+            .projects-button .view-project-btn {
+                display: inline-block;
+                padding: 0.75rem 1.5rem;
+                background-color: #007BFF;
+                /* or your preferred button color */
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            .projects-button .view-project-btn:hover {
+                background-color: #0056b3;
+            }
+
+
         }
     </style>
 </head>
@@ -906,10 +935,10 @@
         <section id="projects">
             <div class="container">
                 <h2>Featured Projects</h2>
+
                 <div class="featured-projects">
                     <div class="project-card">
-                        <img src="automationproject.png"
-                            alt="Infra Automation Project">
+                        <img src="automationproject.png" alt="Infra Automation Project">
                         <div class="project-content">
                             <h3>Automate Cloud Infrastructure with Terraform, GitHub Actions & Boto3</h3>
                             <div class="project-metrics">
@@ -935,8 +964,7 @@
                     </div>
 
                     <div class="project-card">
-                        <img src= "architectureVPC.png"
-                            alt="VPC Architecture">
+                        <img src="architectureVPC.png" alt="VPC Architecture">
                         <div class="project-content">
                             <h3>Build a Virtual Private Cloud with AWS CLI</h3>
                             <div class="project-metrics">
@@ -959,15 +987,21 @@
                             </a>
                         </div>
                     </div>
+                </div> <!-- End of .featured-projects -->
+
+                <!-- ✅ Properly centered button below the grid -->
+                <div style="text-align: center; margin-top: 2rem;">
+
+                    <a href="Projects.html" class="view-project-btn">
+                        <span>View All Projects</span>
+                    </a>
+                </div>
+
+            </div> <!-- End of .container -->
         </section>
 
-        <!-- View All Projects Button -->
-            <div style="text-align: center; margin-top: 2rem;">
 
-            <a href="Projects.html" class="view-project-btn">
-                <span>View All Projects</span>
-            </a>
-        </div>
+
 
         <section id="skills">
             <div class="container">
