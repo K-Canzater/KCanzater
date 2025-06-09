@@ -940,6 +940,33 @@
 
 
 
+
+              .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--midnight-navy) 0%, #1a2f4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--electric-cyan);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+
         }
     </style>
 </head>
@@ -1071,15 +1098,16 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
-                        <img src="architectureVPC.png" alt="VPC Architecture">
-                        <div class="project-content">
-                            <h3>Build a Virtual Private Cloud with AWS CLI</h3>
-                            <div class="project-metrics">
-                                <div class="metric">🏗️ Multi-AZ architecture</div>
-                                <div class="metric">🛡️ Advanced security groups</div>
-                                <div class="metric">⚡ Auto-scaling ready</div>
-                            </div>
+                    <div class="project-image">
+    <i class="fas fa-cloud"></i>
+</div>
+<div class="project-content">
+    <h3>Build a Virtual Private Cloud with AWS CLI</h3>
+    <div class="project-metrics">
+        <div class="metric">🏗️ Multi-AZ architecture</div>
+        <div class="metric">🛡️ Advanced security groups</div>
+        <div class="metric">⚡ Auto-scaling ready</div>
+    </div>
                             <p>Created a production-ready VPC with subnets, route tables, internet gateways, and
                                 security groups — built entirely with AWS CLI commands for maximum reproducibility.</p>
                             <div class="tech-tags">
