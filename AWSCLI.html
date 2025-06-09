@@ -628,6 +628,7 @@
 
             .architecture-section {
                 grid-template-columns: 1fr;
+
             }
 
             .btn-primary {
@@ -774,12 +775,29 @@
                 <div class="stat-label">Network Components</div>
             </div>
         </section>
-
         <!-- Architecture Overview -->
-        <section class="architecture-section" aria-label="Architecture overview">
-            <div class="architecture-text" tabindex="0">
-                <h2>Architecture Overview</h2>
-                <p>This project's architecture centers around a secure, internet-enabled VPC built entirely through AWS
+        <section class="architecture-section" aria-label="Architecture overview" style="display: flex; justify-content: center; align-items: center; padding: 2rem 1rem; 
+                border: 1px solid var(--glass-border); 
+                border-radius: 20px;
+                background: var(--glass-bg); 
+                margin: 2rem auto; 
+                box-shadow: var(--shadow-glow);
+                padding: 2rem 1.5rem;
+                transition: all 0.3s ease;
+
+                max-width: 90%;">
+            <div class="architecture-text" tabindex="0"
+                style="text-align: center; max-width: 900px; width: 100%; margin: 0 auto; padding: 0 20px;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; 
+                    color: var(--electric-cyan);
+                    background: var(--accent-gradient);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                    letter-spacing: 1px;">Architecture Overview</h2>
+                <p style="text-align: center; line-height: 1.6; font-size: 1.1rem;">This project's architecture centers
+                    around a secure, internet-enabled VPC built entirely through AWS
                     CLI automation. The infrastructure includes a custom VPC with CIDR block configuration, a public
                     subnet strategically placed for internet-accessible resources, and an Internet Gateway enabling
                     seamless external communication. Route tables are programmatically updated to direct traffic flow,
@@ -787,103 +805,119 @@
                     demonstrates infrastructure-as-code principles, allowing for rapid deployment and consistent
                     configuration across environments.</p>
             </div>
-            
         </section>
 
-       <!-- Implementation Steps Accordion -->
-<section class="implementation-section" aria-label="Detailed implementation steps">
-    <h2 tabindex="0"
-        style="text-align:center; margin-bottom:2rem; font-size:2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--midnight-navy), var(--electric-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-        Implementation Steps
-    </h2>
+        <!-- Implementation Steps Accordion -->
+        <section class="implementation-section" aria-label="Detailed implementation steps">
+            <h2 tabindex="0"
+                style="text-align:center; margin-bottom:2rem; font-size:2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--midnight-navy), var(--electric-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Implementation Steps
+            </h2>
 
-    <div class="accordion" role="region" aria-labelledby="step1_header" tabindex="0">
-        <button class="accordion-header" id="step1_header" aria-expanded="false" aria-controls="step1_content">
-            <span>1. Infrastructure Planning & VPC Creation</span>
-            <span class="accordion-icon"></span>
-        </button>
-        <div class="accordion-content" id="step1_content" hidden>
-            <ul>
-                <li>Designed secure network architecture with custom CIDR block configuration for scalable cloud deployment.</li>
-                <li>Created VPC foundation using AWS CLI automation commands with programmatic resource allocation.</li>
-                <li class="achievement-highlight"><strong>🎯 Key Impact:</strong> Established isolated cloud environment with 100% CLI automation, eliminating manual console configuration.</li>
-            </ul>
-            <div class="note-box" role="note">
-                <strong>⚠️ Note:</strong> All CLI commands executed with proper error handling and resource validation.
+            <div class="accordion" role="region" aria-labelledby="step1_header" tabindex="0">
+                <button class="accordion-header" id="step1_header" aria-expanded="false" aria-controls="step1_content">
+                    <span>1. Infrastructure Planning & VPC Creation</span>
+                    <span class="accordion-icon"></span>
+                </button>
+                <div class="accordion-content" id="step1_content" hidden>
+                    <ul>
+                        <li>Designed secure network architecture with custom CIDR block configuration for scalable cloud
+                            deployment.</li>
+                        <li>Created VPC foundation using AWS CLI automation commands with programmatic resource
+                            allocation.</li>
+                        <li class="achievement-highlight"><strong>🎯 Key Impact:</strong> Established isolated cloud
+                            environment with 100% CLI automation, eliminating manual console configuration.</li>
+                    </ul>
+                    <div class="note-box" role="note">
+                        <strong>⚠️ Note:</strong> All CLI commands executed with proper error handling and resource
+                        validation.
+                    </div>
+                    <div class="screenshot-gallery">
+                        <img src="AWS CLI Step 1.png" alt="VPC creation CLI command output with resource ID"
+                            tabindex="0" />
+                        <img src="architectureVPC.png" alt="Network architecture diagram showing VPC design"
+                            tabindex="0" />
+                        <img src="VPCCLI.png" alt="AWS Console VPC dashboard showing created resources" tabindex="0" />
+                    </div>
+                    <div class="detailed-link-section">
+                        <a href="https://github.com/K-Canzater/AWS-VPC-Automation" class="detailed-view-link"
+                            target="_blank" rel="noopener noreferrer">
+                            🔍 View Complete CLI Implementation
+                            <span class="link-description">See all commands, configurations, and automation
+                                scripts</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="screenshot-gallery">
-                <img src="AWS CLI Step 1.png" alt="VPC creation CLI command output with resource ID" tabindex="0" />
-                <img src="architectureVPC.png" alt="Network architecture diagram showing VPC design" tabindex="0" />
-                <img src="VPCCLI.png" alt="AWS Console VPC dashboard showing created resources" tabindex="0" />
-            </div>
-            <div class="detailed-link-section">
-                <a href="https://github.com/K-Canzater/AWS-VPC-Automation" 
-                   class="detailed-view-link" target="_blank" rel="noopener noreferrer">
-                    🔍 View Complete CLI Implementation
-                    <span class="link-description">See all commands, configurations, and automation scripts</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="accordion" role="region" aria-labelledby="step2_header" tabindex="0">
-        <button class="accordion-header" id="step2_header" aria-expanded="false" aria-controls="step2_content">
-            <span>2. Network Components & Connectivity Setup</span>
-            <span class="accordion-icon"></span>
-        </button>
-        <div class="accordion-content" id="step2_content" hidden>
-            <ul>
-                <li>Configured public subnet within VPC for internet-accessible resources with strategic placement.</li>
-                <li>Attached Internet Gateway to enable seamless external communication and traffic flow.</li>
-                <li class="achievement-highlight"><strong>🚀 Key Impact:</strong> Achieved secure internet connectivity with zero network downtime and optimized routing efficiency.</li>
-            </ul>
-            <div class="note-box" role="note">
-                <strong>⚠️ Note:</strong> Network components configured for high availability and future scalability.
+            <div class="accordion" role="region" aria-labelledby="step2_header" tabindex="0">
+                <button class="accordion-header" id="step2_header" aria-expanded="false" aria-controls="step2_content">
+                    <span>2. Network Components & Connectivity Setup</span>
+                    <span class="accordion-icon"></span>
+                </button>
+                <div class="accordion-content" id="step2_content" hidden>
+                    <ul>
+                        <li>Configured public subnet within VPC for internet-accessible resources with strategic
+                            placement.</li>
+                        <li>Attached Internet Gateway to enable seamless external communication and traffic flow.</li>
+                        <li class="achievement-highlight"><strong>🚀 Key Impact:</strong> Achieved secure internet
+                            connectivity with zero network downtime and optimized routing efficiency.</li>
+                    </ul>
+                    <div class="note-box" role="note">
+                        <strong>⚠️ Note:</strong> Network components configured for high availability and future
+                        scalability.
+                    </div>
+                    <div class="screenshot-gallery">
+                        <img src="Step 3 Subnet ID.png" alt="Subnet creation CLI output showing resource allocation"
+                            tabindex="0" />
+                        <img src="Step 4 internet gateway.png" alt="Internet Gateway attachment CLI confirmation"
+                            tabindex="0" />
+                        <img src="SubnetCLI.png" alt="AWS Console subnet configuration dashboard" tabindex="0" />
+                    </div>
+                    <div class="detailed-link-section">
+                        <a href="https://github.com/K-Canzater/AWS-VPC-Automation" class="detailed-view-link"
+                            target="_blank" rel="noopener noreferrer">
+                            🔍 View Complete Network Configuration
+                            <span class="link-description">See subnet setup, gateway configuration, and connectivity
+                                proofs</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="screenshot-gallery">
-                <img src="Step 3 Subnet ID.png" alt="Subnet creation CLI output showing resource allocation" tabindex="0" />
-                <img src="Step 4 internet gateway.png" alt="Internet Gateway attachment CLI confirmation" tabindex="0" />
-                <img src="SubnetCLI.png" alt="AWS Console subnet configuration dashboard" tabindex="0" />
-            </div>
-            <div class="detailed-link-section">
-                <a href="https://github.com/K-Canzater/AWS-VPC-Automation"
-                   class="detailed-view-link" target="_blank" rel="noopener noreferrer">
-                    🔍 View Complete Network Configuration
-                    <span class="link-description">See subnet setup, gateway configuration, and connectivity proofs</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="accordion" role="region" aria-labelledby="step3_header" tabindex="0">
-        <button class="accordion-header" id="step3_header" aria-expanded="false" aria-controls="step3_content">
-            <span>3. Traffic Routing & Security Configuration</span>
-            <span class="accordion-icon"></span>
-        </button>
-        <div class="accordion-content" id="step3_content" hidden>
-            <ul>
-                <li>Updated route tables for proper traffic flow management and internet gateway routing.</li>
-                <li>Implemented security groups and network ACLs for comprehensive access control.</li>
-                <li class="achievement-highlight"><strong>⚡ Key Impact:</strong> Reduced infrastructure setup time by 80% through scriptable CLI automation with enterprise-grade security.</li>
-            </ul>
-            <div class="note-box" role="note">
-                <strong>⚠️ Note:</strong> All network traffic validated and tested for proper connectivity and security compliance.
+            <div class="accordion" role="region" aria-labelledby="step3_header" tabindex="0">
+                <button class="accordion-header" id="step3_header" aria-expanded="false" aria-controls="step3_content">
+                    <span>3. Traffic Routing & Security Configuration</span>
+                    <span class="accordion-icon"></span>
+                </button>
+                <div class="accordion-content" id="step3_content" hidden>
+                    <ul>
+                        <li>Updated route tables for proper traffic flow management and internet gateway routing.</li>
+                        <li>Implemented security groups and network ACLs for comprehensive access control.</li>
+                        <li class="achievement-highlight"><strong>⚡ Key Impact:</strong> Reduced infrastructure setup
+                            time by 80% through scriptable CLI automation with enterprise-grade security.</li>
+                    </ul>
+                    <div class="note-box" role="note">
+                        <strong>⚠️ Note:</strong> All network traffic validated and tested for proper connectivity and
+                        security compliance.
+                    </div>
+                    <div class="screenshot-gallery">
+                        <img src="RouteCLI.png" alt="Route table configuration in AWS Console" tabindex="0" />
+                        <img src="InternetCLI.png" alt="Internet Gateway status and configuration" tabindex="0" />
+                        <img src="VPCFinal.png" alt="Complete VPC architecture showing all connected components"
+                            tabindex="0" />
+                    </div>
+                    <div class="detailed-link-section">
+                        <a href="https://github.com/K-Canzater/AWS-VPC-Automation" class="detailed-view-link"
+                            target="_blank" rel="noopener noreferrer">
+                            🔍 View Complete Security & Routing Setup
+                            <span class="link-description">See routing configurations, security implementations, and
+                                validation results</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="screenshot-gallery">
-                <img src="RouteCLI.png" alt="Route table configuration in AWS Console" tabindex="0" />
-                <img src="InternetCLI.png" alt="Internet Gateway status and configuration" tabindex="0" />
-                <img src="VPCFinal.png" alt="Complete VPC architecture showing all connected components" tabindex="0" />
-            </div>
-            <div class="detailed-link-section">  
-                <a href="https://github.com/K-Canzater/AWS-VPC-Automation"
-                   class="detailed-view-link" target="_blank" rel="noopener noreferrer">
-                    🔍 View Complete Security & Routing Setup
-                    <span class="link-description">See routing configurations, security implementations, and validation results</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <style>
             /* Add these hover effects to your existing CSS */
