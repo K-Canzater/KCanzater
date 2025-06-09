@@ -379,7 +379,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       border: 1px solid rgba(0, 212, 255, 0.2);
-      /* Super subtle border that plays WITH your gradient */
       border-radius: 8px;
       box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
       /* Makes it POP off the background */
@@ -408,12 +407,37 @@
 
     .accordion-content ul {
       list-style: disc inside;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
     }
 
+    .accordion-content li {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+
+    }
+
+    .accordion-content .key-impact {
+      background: rgba(0, 212, 255, 0.1);
+      /* Subtle electric cyan glow */
+      border-left: 4px solid var(--electric-cyan);
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+    }
+
+
+
+
+
+
+
+
+
     .accordion.open .accordion-content {
-      padding: 1rem 2rem 2rem;
+      padding: 2rem 2rem 2.5rem;
       height: auto;
     }
 
@@ -432,11 +456,11 @@
     .note-box {
       background: rgba(255, 255, 255, 0.15);
       border-left: 6px solid var(--coral-primary);
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 2rem;
       border-radius: 12px;
       font-weight: 600;
       color: var(--midnight-navy);
-      margin-top: 1rem;
+      margin: 2.5rem 0 1.5rem 0;
       user-select: text;
       box-shadow: var(--shadow-glow);
     }
@@ -900,7 +924,6 @@
         transform: rotate(90deg) scale(1.1);
       }
 
-      /* Optional: Add subtle hover effect to the whole accordion container */
       .accordion:hover {
         transform: translateY(-1px);
       }
