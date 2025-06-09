@@ -97,7 +97,11 @@
             box-shadow: var(--shadow-glow);
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: float 3s ease-in-out infinite;
+            text-decoration: none !important;
         }
 
         .floating-contact:hover {
@@ -811,6 +815,7 @@
             justify-content: center;
             width: 50px;
             height: 50px;
+            text-decoration: none;
         }
 
         .social-links a:hover {
@@ -962,12 +967,10 @@
 
 <body>
     <!-- Floating Contact Button -->
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khayla.canzater@gmail.com" 
-   class="floating-contact" 
-   target="_blank" 
-   title="Send me an email">
-    <i class="fas fa-envelope"></i>
-</a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=khayla.canzater@gmail.com" class="floating-contact"
+        target="_blank" title="Send me an email">
+        <i class="fas fa-envelope"></i>
+    </a>
 
     <header>
         <nav>
